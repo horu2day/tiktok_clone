@@ -5,7 +5,7 @@ import 'package:tiktok_clone/constants/sizes.dart';
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
-  void onSignUpTap(BuildContext context) {
+  void _onSignUpTap(BuildContext context) {
     Navigator.of(context).pop();
     // Navigator.of(context).push(
     //   MaterialPageRoute(
@@ -52,7 +52,7 @@ class LoginScreen extends StatelessWidget {
               const Text("Don's have an account?"),
               Gaps.h5,
               GestureDetector(
-                onTap: () => onSignUpTap(context),
+                onTap: () => _onSignUpTap(context),
                 child: Text(
                   'Sign up',
                   style: TextStyle(
