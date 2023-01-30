@@ -33,7 +33,13 @@ class _PasswordScreenState extends State<PasswordScreen> {
   }
 
   bool _isPasswordValid() {
-    return _password.isNotEmpty && _password.length > 8;
+    if (_password.isEmpty) return false;
+    if (_password.length < 8) return false;
+    if (!_password.contains(RegExp(r"[a-z]"))) return false;
+    if (!_password.contains(RegExp(r"[A-Z]"))) return false;
+    if (!_password.contains(RegExp(r"[0-9]"))) return false;
+    if (!_password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) return false;
+    return true;
   }
 
   void _onScaffoldTap() {
@@ -143,7 +149,20 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 const Text('8 to 20 characters')
               ],
             ),
-            Gaps.v28,
+            Gaps.v10,
+            Row(
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.circleCheck,
+                  size: Sizes.size20,
+                  color:
+                      _isPasswordValid() ? Colors.green : Colors.grey.shade400,
+                ),
+                Gaps.h5,
+                const Text('Letters, numbers, and special characters')
+              ],
+            ),
+            Gaps.v40,
             GestureDetector(
               onTap: _onSubmit,
               child: FormButton(
