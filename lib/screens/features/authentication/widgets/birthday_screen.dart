@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/screens/features/authentication/widgets/email_screen.dart';
 import 'package:tiktok_clone/screens/features/authentication/widgets/form_button.dart';
+import 'package:tiktok_clone/screens/features/onboarding/interests_screen.dart';
 
 class BirthdayScreen extends StatefulWidget {
   const BirthdayScreen({super.key});
@@ -15,15 +15,12 @@ class BirthdayScreen extends StatefulWidget {
 
 class _BirthdayScreenState extends State<BirthdayScreen> {
   final TextEditingController _birthdayController = TextEditingController();
-  DateTime date = DateTime.now();
+  DateTime initialdate = DateTime.now();
   @override
   void initState() {
     super.initState();
-
-    final textDate = date.toString().split(" ").first;
-    _birthdayController.value = TextEditingValue(
-      text: textDate,
-    );
+    print(initialdate);
+    _setTextFieldDate(initialdate);
   }
 
   @override
@@ -35,13 +32,20 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   void onNextTap() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const EmailScreen(),
+        builder: (context) => const InterestsScreen(),
       ),
     );
   }
 
   void _onScaffoldTap() {
     FocusScope.of(context).unfocus();
+  }
+
+  void _setTextFieldDate(DateTime date) {
+    final textDate = date.toString().split(" ").first;
+    _birthdayController.value = TextEditingValue(
+      text: textDate,
+    );
   }
 
   @override
@@ -92,9 +96,16 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
           ]),
         ),
         bottomNavigationBar: BottomAppBar(
+          child: SizedBox(
+            height: 300,
             child: CupertinoDatePicker(
-          onDateTimeChanged: (DateTime value) {},
-        )),
+              maximumDate: initialdate,
+              initialDateTime: initialdate,
+              mode: CupertinoDatePickerMode.date,
+              onDateTimeChanged: _setTextFieldDate,
+            ),
+          ),
+        ),
       ),
     );
   }
