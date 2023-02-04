@@ -39,40 +39,45 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: screens[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onTap,
-        selectedItemColor: Theme.of(context).primaryColor,
-        items: const [
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.house),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: _onTap,
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        destinations: const [
+          NavigationDestination(
+            icon: FaIcon(
+              FontAwesomeIcons.house,
+              color: Colors.teal,
+            ),
             label: 'Home',
-            tooltip: 'What are you?',
-            backgroundColor: Colors.amber,
           ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.magnifyingGlass),
+          NavigationDestination(
+            icon: FaIcon(
+              FontAwesomeIcons.magnifyingGlass,
+              color: Colors.pink,
+            ),
             label: 'Search',
-            tooltip: 'What are you?',
-            backgroundColor: Colors.cyan,
           ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.mailchimp),
-            label: 'Center',
-            tooltip: 'What are you?',
-            backgroundColor: Colors.pink,
+          NavigationDestination(
+            icon: FaIcon(
+              FontAwesomeIcons.goodreads,
+              color: Colors.amber,
+            ),
+            label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.simCard),
-            label: 'Me',
-            tooltip: 'What are you?',
-            backgroundColor: Colors.blue,
+          NavigationDestination(
+            icon: FaIcon(
+              FontAwesomeIcons.car,
+              color: Colors.blue,
+            ),
+            label: 'Car',
           ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.car),
-            label: 'Option',
-            tooltip: 'What are you?',
-            backgroundColor: Colors.green,
+          NavigationDestination(
+            icon: FaIcon(
+              FontAwesomeIcons.house,
+              color: Colors.cyan,
+            ),
+            label: 'Home',
           ),
         ],
       ),
