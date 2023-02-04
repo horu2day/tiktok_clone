@@ -19,7 +19,6 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   @override
   void initState() {
     super.initState();
-    print(initialdate);
     _setTextFieldDate(initialdate);
   }
 
