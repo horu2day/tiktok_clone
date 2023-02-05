@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class StfScreen extends StatefulWidget {
-  const StfScreen({super.key});
+  const StfScreen(Offstage offstage, {super.key});
 
   @override
   State<StfScreen> createState() => _StfScreenState();
