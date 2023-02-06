@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/screens/features/main_navigation/stf_screen.dart';
 import 'package:tiktok_clone/screens/features/main_navigation/widgets/nav_tab.dart';
@@ -61,6 +62,28 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           offstage: _selectedIndex != 0,
           child: const StfScreen(Offstage()),
         ),
+        Offstage(
+          offstage: _selectedIndex != 1,
+          child: const StfScreen(Offstage()),
+        ),
+        // Opacity(
+        //   opacity: _selectedIndex != 2 ? 0 : 1,
+        //   child: Container(
+        //     alignment: Alignment.center,
+        //     child: const Text(
+        //       'Center',
+        //       style: TextStyle(fontSize: Sizes.size40),
+        //     ),
+        //   ),
+        // ),
+        Offstage(
+          offstage: _selectedIndex != 3,
+          child: const StfScreen(Offstage()),
+        ),
+        Offstage(
+          offstage: _selectedIndex != 4,
+          child: const StfScreen(Offstage()),
+        ),
       ]),
       bottomNavigationBar: BottomAppBar(
         color: Colors.black,
@@ -83,12 +106,49 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 selectedIcon: FontAwesomeIcons.solidCompass,
                 onTap: () => _onTap(1),
               ),
-              NavTab(
-                text: "Home",
-                isSelected: _selectedIndex == 2,
-                icon: FontAwesomeIcons.house,
-                selectedIcon: FontAwesomeIcons.house,
-                onTap: () => _onTap(2),
+              Gaps.h24,
+              Stack(
+                children: [
+                  Positioned(
+                    right: 20,
+                    child: Container(
+                      height: 30,
+                      width: 25,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: Sizes.size8,
+                      ),
+                      decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(
+                            Sizes.size11,
+                          )),
+                    ),
+                  ),
+                  Positioned(
+                    left: 20,
+                    child: Container(
+                      height: 30,
+                      width: 25,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: Sizes.size8,
+                      ),
+                      decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(
+                            Sizes.size11,
+                          )),
+                    ),
+                  ),
+                  Container(
+                    height: 30,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                    ),
+                    child: const FaIcon(
+                      FontAwesomeIcons.plus,
+                    ),
+                  )
+                ],
               ),
               NavTab(
                 text: "Inbox",
