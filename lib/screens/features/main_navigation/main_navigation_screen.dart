@@ -4,6 +4,7 @@ import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/screens/features/main_navigation/stf_screen.dart';
 import 'package:tiktok_clone/screens/features/main_navigation/widgets/nav_tab.dart';
+import 'package:tiktok_clone/screens/features/main_navigation/widgets/post_video_button.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -52,6 +53,17 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  void _onPostVideoButtonTap() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => Scaffold(
+          appBar: AppBar(title: const Text('Record video')),
+        ),
+        fullscreenDialog: true,
+      ),
+    );
   }
 
   @override
@@ -107,49 +119,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 onTap: () => _onTap(1),
               ),
               Gaps.h24,
-              Stack(
-                children: [
-                  Positioned(
-                    right: 20,
-                    child: Container(
-                      height: 30,
-                      width: 25,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: Sizes.size8,
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(
-                            Sizes.size11,
-                          )),
-                    ),
-                  ),
-                  Positioned(
-                    left: 20,
-                    child: Container(
-                      height: 30,
-                      width: 25,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: Sizes.size8,
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(
-                            Sizes.size11,
-                          )),
-                    ),
-                  ),
-                  Container(
-                    height: 30,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                    ),
-                    child: const FaIcon(
-                      FontAwesomeIcons.plus,
-                    ),
-                  )
-                ],
+              GestureDetector(
+                onTap: _onPostVideoButtonTap,
+                child: const PostVideoButton(),
               ),
+              Gaps.h24,
               NavTab(
                 text: "Inbox",
                 isSelected: _selectedIndex == 3,
