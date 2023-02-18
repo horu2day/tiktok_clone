@@ -1,8 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPost extends StatefulWidget {
-  const VideoPost({super.key});
+  final Function onVideoFinished;
+  const VideoPost({
+    super.key,
+    required this.onVideoFinished,
+  });
 
   @override
   State<VideoPost> createState() => _VideoPostState();
@@ -11,17 +16,35 @@ class VideoPost extends StatefulWidget {
 class _VideoPostState extends State<VideoPost> {
   final VideoPlayerController _videoPlayerController =
       VideoPlayerController.asset("assets/videos/video.mp4");
+  void _onVideoChange() {
+    if (_videoPlayerController.value.isInitialized) {
+      if (_videoPlayerController.value.duration ==
+          _videoPlayerController.value.position) {
+        widget.onVideoFinished();
+      }
+    }
+  }
 
   void _initVideoPlayer() async {
     await _videoPlayerController.initialize();
     _videoPlayerController.play();
     setState(() {});
+    if (kIsWeb) {
+      await _videoPlayerController.setVolume(0);
+    }
+    _videoPlayerController.addListener(_onVideoChange);
   }
 
   @override
   void initState() {
     super.initState();
     _initVideoPlayer();
+  }
+
+  @override
+  void dispose() {
+    _videoPlayerController.dispose();
+    super.dispose();
   }
 
   @override
