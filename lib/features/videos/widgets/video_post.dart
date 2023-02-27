@@ -136,26 +136,42 @@ class _VideoPostState extends State<VideoPost>
             ),
           ),
           Positioned(
-            bottom: 30,
-            left: 30,
+            bottom: 20,
+            left: 10,
             child: Column(
               children: const [
                 Text(
                   "@니꼬",
+                  textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: Sizes.size20,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Gaps.v20,
+                Gaps.v10,
                 Text(
                   "This is my house in Thailand!!!",
                   style: TextStyle(
-                    fontSize: Sizes.size10,
+                    fontSize: Sizes.size16,
                     color: Colors.white,
-                    fontWeight: FontWeight.bold,
                   ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            right: 10,
+            child: Column(
+              children: const [
+                CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
+                  foregroundImage: NetworkImage(
+                      "https://avatars.githubusercontent.com/u/594733?s=400&u=51d0a83f972e0f874318c581a91cf0247a927773&v=4"),
+                  child: Text('니꼬'),
                 ),
               ],
             ),
