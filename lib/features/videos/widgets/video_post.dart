@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/videos/widgets/video_button.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -149,7 +150,7 @@ class _VideoPostState extends State<VideoPost>
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Gaps.v10,
+                Gaps.v24,
                 Text(
                   "This is my house in Thailand!!!",
                   style: TextStyle(
@@ -171,7 +172,22 @@ class _VideoPostState extends State<VideoPost>
                   foregroundColor: Colors.white,
                   foregroundImage: NetworkImage(
                       "https://avatars.githubusercontent.com/u/594733?s=400&u=51d0a83f972e0f874318c581a91cf0247a927773&v=4"),
-                  child: Text('니꼬'),
+                  child: Text('카오'),
+                ),
+                Gaps.v24,
+                VideoButton(
+                  icon: FontAwesomeIcons.solidHeart,
+                  text: "2.9M",
+                ),
+                Gaps.v24,
+                VideoButton(
+                  icon: FontAwesomeIcons.solidComment,
+                  text: "33K",
+                ),
+                Gaps.v24,
+                VideoButton(
+                  icon: FontAwesomeIcons.share,
+                  text: "Share",
                 ),
               ],
             ),
