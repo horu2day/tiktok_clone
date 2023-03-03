@@ -70,6 +70,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: _selectedIndex == 0 ? Colors.black : Colors.white,
       body: Stack(children: [
         Offstage(
           offstage: _selectedIndex != 0,
@@ -79,16 +80,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           offstage: _selectedIndex != 1,
           child: const StfScreen(Offstage()),
         ),
-        // Opacity(
-        //   opacity: _selectedIndex != 2 ? 0 : 1,
-        //   child: Container(
-        //     alignment: Alignment.center,
-        //     child: const Text(
-        //       'Center',
-        //       style: TextStyle(fontSize: Sizes.size40),
-        //     ),
-        //   ),
-        // ),
         Offstage(
           offstage: _selectedIndex != 3,
           child: const StfScreen(Offstage()),
