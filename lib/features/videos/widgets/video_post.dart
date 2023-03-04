@@ -102,7 +102,11 @@ class _VideoPostState extends State<VideoPost>
       _onTogglePause();
     }
     await showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(Sizes.size16),
+      ),
       context: context,
+      isScrollControlled: true,
       builder: (context) => const VideoComments(),
     );
     _onTogglePause();
@@ -155,6 +159,7 @@ class _VideoPostState extends State<VideoPost>
             bottom: 20,
             left: 10,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 Text(
                   "@니꼬",

@@ -70,6 +70,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false, // 키보드가 올라옴으로 인해 Body가 축소되는걸 막는다.
       backgroundColor: _selectedIndex == 0 ? Colors.black : Colors.white,
       body: Stack(children: [
         Offstage(
