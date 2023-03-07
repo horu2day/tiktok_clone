@@ -14,19 +14,60 @@ final tabs = [
   "Brands",
 ];
 
-class DiscoverScreen extends StatelessWidget {
+class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});
+
+  @override
+  State<DiscoverScreen> createState() => _DiscoverScreenState();
+}
+
+class _DiscoverScreenState extends State<DiscoverScreen>
+    with SingleTickerProviderStateMixin {
+  final TextEditingController _textEditingController =
+      TextEditingController(text: "Initial Text");
+  late TabController _tabController;
+
+  //     TabController(length: tabs.length, vsync: this);
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: tabs.length, vsync: this);
+    _tabController.addListener(() {
+      FocusManager.instance.primaryFocus?.unfocus();
+    });
+  }
+
+  void _onSearchChanged(String value) {
+    print("Searching from $value");
+  }
+
+  void _onSubmitted(String value) {
+    print("Submitted $value");
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: tabs.length,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           elevation: 1,
           centerTitle: true,
-          title: const CupertinoSearchTextField(),
+          title: CupertinoSearchTextField(
+            controller: _textEditingController,
+            onChanged: _onSearchChanged,
+            onSubmitted: _onSubmitted,
+          ),
           bottom: TabBar(
+            controller: _tabController,
             splashFactory: NoSplash.splashFactory,
             padding: const EdgeInsets.symmetric(
               horizontal: Sizes.size16,
@@ -48,8 +89,11 @@ class DiscoverScreen extends StatelessWidget {
           ),
         ),
         body: TabBarView(
+          controller: _tabController,
           children: [
             GridView.builder(
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
                 itemCount: 20,
                 padding: const EdgeInsets.symmetric(
                   horizontal: Sizes.size6,
