@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
@@ -24,7 +25,7 @@ class DiscoverScreen extends StatelessWidget {
         appBar: AppBar(
           elevation: 1,
           centerTitle: true,
-          title: const Text('Discover'),
+          title: const CupertinoSearchTextField(),
           bottom: TabBar(
             splashFactory: NoSplash.splashFactory,
             padding: const EdgeInsets.symmetric(
@@ -60,13 +61,19 @@ class DiscoverScreen extends StatelessWidget {
                     childAspectRatio: 9 / 21),
                 itemBuilder: (context, index) => Column(
                       children: [
-                        AspectRatio(
-                          aspectRatio: 9 / 16,
-                          child: FadeInImage.assetNetwork(
-                            fit: BoxFit.cover,
-                            placeholder: "assets/images/placeholder.jpg",
-                            image:
-                                "https://p4.wallpaperbetter.com/wallpaper/63/921/193/anime-anime-girls-neon-genesis-evangelion-rebuild-of-evangelion-super-robot-taisen-hd-wallpaper-preview.jpg",
+                        Container(
+                          clipBehavior: Clip.hardEdge,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(Sizes.size4),
+                          ),
+                          child: AspectRatio(
+                            aspectRatio: 9 / 16,
+                            child: FadeInImage.assetNetwork(
+                              fit: BoxFit.cover,
+                              placeholder: "assets/images/placeholder.jpg",
+                              image:
+                                  "https://scontent-gmp1-1.xx.fbcdn.net/v/t31.18172-8/17017194_263347130756747_7925789519210824998_o.jpg?_nc_cat=101&ccb=1-7&_nc_sid=9267fe&_nc_ohc=VBUOmZtZoRcAX9qiaie&_nc_ht=scontent-gmp1-1.xx&oh=00_AfAtsYzRIqeufEn5H2uxUnpV1oiJpgLdJZUPThsggg5mSQ&oe=642BCF21",
+                            ),
                           ),
                         ),
                         Gaps.v10,
