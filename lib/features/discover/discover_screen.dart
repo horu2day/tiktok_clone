@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
@@ -26,7 +25,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   final TextEditingController _textEditingController =
       TextEditingController(text: "Initial Text");
   late TabController _tabController;
-
+  bool _isWriting = false;
   //     TabController(length: tabs.length, vsync: this);
   @override
   void initState() {
@@ -45,6 +44,19 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     print("Submitted $value");
   }
 
+  void _onStopWriting() {
+    FocusScope.of(context).unfocus();
+    setState(() {
+      _isWriting = false;
+    });
+  }
+
+  void _onStartWriting() {
+    setState(() {
+      _isWriting = true;
+    });
+  }
+
   @override
   void dispose() {
     _textEditingController.dispose();
@@ -61,10 +73,70 @@ class _DiscoverScreenState extends State<DiscoverScreen>
         appBar: AppBar(
           elevation: 1,
           centerTitle: true,
-          title: CupertinoSearchTextField(
-            controller: _textEditingController,
-            onChanged: _onSearchChanged,
-            onSubmitted: _onSubmitted,
+          title: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                const CircleAvatar(
+                  radius: 18,
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
+                  foregroundImage: NetworkImage(
+                      "https://avatars.githubusercontent.com/u/594733?s=400&u=51d0a83f972e0f874318c581a91cf0247a927773&v=4"),
+                  child: Text('카오'),
+                ),
+                Gaps.h10,
+                Expanded(
+                  child: SizedBox(
+                    height: Sizes.size44,
+                    child: TextField(
+                      onTap: _onStartWriting,
+                      cursorColor: Theme.of(context).primaryColor,
+                      decoration: InputDecoration(
+                        hintText: "Search",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                            Sizes.size12,
+                          ),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey.shade200,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: Sizes.size10,
+                        ),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.only(
+                            left: Sizes.size14,
+                            top: Sizes.size12,
+                          ),
+                          child: FaIcon(
+                            FontAwesomeIcons.magnifyingGlass,
+                            color: Colors.grey.shade900,
+                          ),
+                        ),
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.only(
+                            right: Sizes.size4,
+                          ),
+                          child: Row(mainAxisSize: MainAxisSize.min, children: [
+                            if (_isWriting)
+                              GestureDetector(
+                                onTap: _onStopWriting,
+                                child: FaIcon(
+                                  FontAwesomeIcons.circleXmark,
+                                  size: Sizes.size16,
+                                  color: Colors.grey.shade900,
+                                ),
+                              ),
+                          ]),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           bottom: TabBar(
             controller: _tabController,
