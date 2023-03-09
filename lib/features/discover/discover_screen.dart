@@ -26,6 +26,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
       TextEditingController(text: "Initial Text");
   late TabController _tabController;
   bool _isWriting = false;
+
   //     TabController(length: tabs.length, vsync: this);
   @override
   void initState() {
@@ -47,6 +48,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   void _onStopWriting() {
     FocusScope.of(context).unfocus();
     setState(() {
+      _textEditingController.text = "";
       _isWriting = false;
     });
   }
@@ -77,19 +79,12 @@ class _DiscoverScreenState extends State<DiscoverScreen>
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                const CircleAvatar(
-                  radius: 18,
-                  backgroundColor: Colors.black,
-                  foregroundColor: Colors.white,
-                  foregroundImage: NetworkImage(
-                      "https://avatars.githubusercontent.com/u/594733?s=400&u=51d0a83f972e0f874318c581a91cf0247a927773&v=4"),
-                  child: Text('카오'),
-                ),
                 Gaps.h10,
                 Expanded(
                   child: SizedBox(
                     height: Sizes.size44,
                     child: TextField(
+                      controller: _textEditingController,
                       onTap: _onStartWriting,
                       cursorColor: Theme.of(context).primaryColor,
                       decoration: InputDecoration(
@@ -125,7 +120,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                                 onTap: _onStopWriting,
                                 child: FaIcon(
                                   FontAwesomeIcons.circleXmark,
-                                  size: Sizes.size16,
+                                  size: Sizes.size20,
                                   color: Colors.grey.shade900,
                                 ),
                               ),
@@ -135,6 +130,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                     ),
                   ),
                 ),
+                Gaps.h10,
+                const FaIcon(FontAwesomeIcons.sliders),
               ],
             ),
           ),
