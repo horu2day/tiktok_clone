@@ -16,16 +16,24 @@ class _ActivityScreenState extends State<ActivityScreen>
   late final AnimationController _animationController = AnimationController(
       vsync: this,
       duration: const Duration(
-        milliseconds: 200,
+        milliseconds: 150,
       ));
+
   late final Animation<double> _arrowAnimation = Tween(
     begin: 0.0,
     end: 0.5,
   ).animate(_animationController);
+
   late final Animation<Offset> _panelAnimation = Tween(
     begin: const Offset(0, -1),
     end: Offset.zero,
   ).animate(_animationController);
+
+  late final Animation<Color?> _barrierAnimation = ColorTween(
+    begin: Colors.transparent,
+    end: Colors.black38,
+  ).animate(_animationController);
+
   final List<Map<String, dynamic>> _tabs = [
     {
       "title": "All activity",
@@ -53,17 +61,21 @@ class _ActivityScreenState extends State<ActivityScreen>
     }
   ];
 
+  bool _showBarrier = false;
   void _onDismissed(String notification) {
     notifications.remove(notification);
     setState(() {});
   }
 
-  void _onTitleTap() {
+  void _ontoggleAnimations() async {
     if (_animationController.isCompleted) {
-      _animationController.reverse();
+      await _animationController.reverse();
     } else {
       _animationController.forward();
     }
+    setState(() {
+      _showBarrier = !_showBarrier;
+    });
   }
 
   @override
@@ -71,11 +83,16 @@ class _ActivityScreenState extends State<ActivityScreen>
     return Scaffold(
       appBar: AppBar(
         title: GestureDetector(
-          onTap: _onTitleTap,
+          onTap: _ontoggleAnimations,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("All activity"),
+              const Text(
+                "All activity ",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               RotationTransition(
                 turns: _arrowAnimation,
                 child: const FaIcon(
@@ -189,6 +206,12 @@ class _ActivityScreenState extends State<ActivityScreen>
                 ),
             ],
           ),
+          if (_showBarrier)
+            AnimatedModalBarrier(
+              color: _barrierAnimation,
+              dismissible: true,
+              onDismiss: _ontoggleAnimations,
+            ),
           SlideTransition(
             position: _panelAnimation,
             child: Container(
