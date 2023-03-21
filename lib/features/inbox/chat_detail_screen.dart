@@ -11,6 +11,23 @@ class ChatDetailScreen extends StatefulWidget {
 }
 
 class _ChatDetailScreenState extends State<ChatDetailScreen> {
+  final TextEditingController _textEditingController =
+      TextEditingController(text: "");
+  bool _isWriting = false;
+  void _onStopWriting() {
+    FocusScope.of(context).unfocus();
+    setState(() {
+      _textEditingController.text = "";
+      _isWriting = false;
+    });
+  }
+
+  void _onStartWriting() {
+    setState(() {
+      _isWriting = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,19 +136,67 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
               separatorBuilder: (context, index) => Gaps.v10,
               itemCount: 10),
           Positioned(
-            bottom: 0,
+            bottom: 10,
             width: MediaQuery.of(context).size.width,
             child: BottomAppBar(
-              child: Row(
-                children: [
-                  const Expanded(child: TextField()),
-                  Gaps.h20,
-                  Container(
-                    child: const FaIcon(
-                      FontAwesomeIcons.paperPlane,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 4,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: Sizes.size44,
+                        child: TextField(
+                          controller: _textEditingController,
+                          onTap: _onStartWriting,
+                          decoration: InputDecoration(
+                            hintText: "Send a message",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(
+                                Sizes.size12,
+                              ),
+                            ),
+                            suffixIcon: Padding(
+                              padding: const EdgeInsets.only(
+                                right: Sizes.size4,
+                              ),
+                              child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    FaIcon(
+                                      FontAwesomeIcons.faceSmile,
+                                      size: Sizes.size24,
+                                      color: Colors.grey.shade900,
+                                    ),
+                                  ]),
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ],
+                    Gaps.h10,
+                    Container(
+                      height: Sizes.size40,
+                      width: Sizes.size40,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.grey.shade300,
+                      ),
+                      child: GestureDetector(
+                        onTap: _onStopWriting,
+                        child: const Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.solidPaperPlane,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
