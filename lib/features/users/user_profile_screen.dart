@@ -11,9 +11,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      physics: const BouncingScrollPhysics(),
       slivers: [
         SliverAppBar(
           floating: true,
+          snap: true,
           stretch: true,
           pinned: true,
           backgroundColor: Colors.teal,
@@ -23,6 +25,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             stretchModes: const [
               StretchMode.blurBackground,
               StretchMode.zoomBackground,
+              StretchMode.fadeTitle,
             ],
             background: Image.asset(
               "assets/images/placeholder.jpg",
@@ -35,7 +38,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             delegate: SliverChildBuilderDelegate(
               (context, index) => Container(
                 color: Colors.amber[100 * (index % 9)],
-                child: Text("Item $index"),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text("Item $index"),
+                ),
               ),
             ),
             itemExtent: 100)
