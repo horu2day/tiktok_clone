@@ -11,7 +11,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
-      physics: const BouncingScrollPhysics(),
       slivers: [
         SliverAppBar(
           floating: true,
@@ -31,7 +30,15 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             ),
             title: const Text("Hello!"),
           ),
-        )
+        ),
+        SliverFixedExtentList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) => Container(
+                color: Colors.amber[100 * (index % 9)],
+                child: Text("Item $index"),
+              ),
+            ),
+            itemExtent: 100)
       ],
     );
   }
