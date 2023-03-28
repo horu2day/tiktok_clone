@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../constants/gaps.dart';
 import '../../constants/sizes.dart';
 
 class UserProfileScreen extends StatefulWidget {
@@ -16,59 +18,45 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       physics: const BouncingScrollPhysics(),
       slivers: [
         SliverAppBar(
-          // floating: true,
-          // snap: true,
-          stretch: true,
-          pinned: true,
-          backgroundColor: Colors.teal,
-          collapsedHeight: 80,
-          expandedHeight: 200,
-          flexibleSpace: FlexibleSpaceBar(
-            stretchModes: const [
-              StretchMode.blurBackground,
-              StretchMode.zoomBackground,
-              StretchMode.fadeTitle,
+          centerTitle: true,
+          title: const Text('카오'),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const FaIcon(FontAwesomeIcons.gear),
+            ),
+          ],
+        ),
+        SliverToBoxAdapter(
+          child: Column(
+            children: [
+              const CircleAvatar(
+                radius: 30,
+                foregroundColor: Colors.teal,
+                foregroundImage: NetworkImage(
+                    "https://avatars.githubusercontent.com/u/594733?s=400&u=51d0a83f972e0f874318c581a91cf0247a927773&v=4"),
+                child: Text('카오'),
+              ),
+              Gaps.v20,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "@카오",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: Sizes.size18,
+                    ),
+                  ),
+                  Gaps.h5,
+                  FaIcon(
+                    FontAwesomeIcons.solidCircleCheck,
+                    size: Sizes.size16,
+                    color: Colors.blue.shade500,
+                  ),
+                ],
+              ),
             ],
-            background: Image.asset(
-              "assets/images/placeholder.jpg",
-              fit: BoxFit.cover,
-            ),
-            title: const Text("Hello!"),
-          ),
-        ),
-        SliverFixedExtentList(
-          delegate: SliverChildBuilderDelegate(
-            childCount: 50,
-            (context, index) => Container(
-              color: Colors.amber[100 * (index % 9)],
-              child: Align(
-                alignment: Alignment.center,
-                child: Text("Item $index"),
-              ),
-            ),
-          ),
-          itemExtent: 100,
-        ),
-        SliverPersistentHeader(
-          delegate: CustomDelegate(),
-          pinned: true,
-          floating: true,
-        ),
-        SliverGrid(
-          delegate: SliverChildBuilderDelegate(
-            childCount: 50,
-            (context, index) => Container(
-              color: Colors.blue[100 * (index % 9)],
-              child: Align(
-                alignment: Alignment.center,
-                child: Text("Item $index"),
-              ),
-            ),
-          ),
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 100,
-            mainAxisSpacing: Sizes.size20,
-            childAspectRatio: 1,
           ),
         ),
       ],
