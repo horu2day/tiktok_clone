@@ -185,28 +185,38 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     ),
                   ],
                 ),
-                Gaps.v5,
-                const TabBar(
-                  indicatorSize: TabBarIndicatorSize.label,
-                  indicatorColor: Colors.black,
-                  labelPadding: EdgeInsets.only(
-                    bottom: Sizes.size10,
+                Gaps.v20,
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.symmetric(
+                      horizontal: BorderSide(
+                        color: Colors.grey.shade200,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
-                  labelColor: Colors.black,
-                  tabs: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: Sizes.size20,
-                      ),
-                      child: Icon(Icons.grid_4x4_rounded),
+                  child: const TabBar(
+                    indicatorSize: TabBarIndicatorSize.label,
+                    indicatorColor: Colors.black,
+                    labelPadding: EdgeInsets.symmetric(
+                      vertical: Sizes.size10,
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: Sizes.size20,
+                    labelColor: Colors.black,
+                    tabs: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: Sizes.size20,
+                        ),
+                        child: Icon(Icons.grid_4x4_rounded),
                       ),
-                      child: FaIcon(FontAwesomeIcons.heart),
-                    ),
-                  ],
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: Sizes.size20,
+                        ),
+                        child: FaIcon(FontAwesomeIcons.heart),
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),
