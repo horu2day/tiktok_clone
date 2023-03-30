@@ -76,6 +76,7 @@ class _VideoPostState extends State<VideoPost>
   }
 
   void _onVisibilityChanged(VisibilityInfo info) {
+    if (!mounted) return;
     //Play가 되는 조건 ,영상이 전부 화면에 들어 있으면서 재생이 안되고 있을때 Play해라
     if (info.visibleFraction == 1 &&
         !_isPaused &&
