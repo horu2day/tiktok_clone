@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/features/settings/settings_screen.dart';
 
 import '../../constants/gaps.dart';
 import '../../constants/sizes.dart';
@@ -13,6 +14,14 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
+  void _onGearPressed() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const SettingsScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,7 +36,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 title: const Text('카오'),
                 actions: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: _onGearPressed,
                     icon: const FaIcon(FontAwesomeIcons.gear),
                   ),
                 ],
@@ -199,6 +208,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               ),
             ];
           },
+          //body: Container(),
           body: TabBarView(
             children: [
               GridView.builder(
