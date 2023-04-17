@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -53,18 +54,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
           // ),
           ListTile(
             onTap: () async {
-              final date = await showDatePicker(
-                context: context,
-                initialDate: DateTime.now(),
-                firstDate: DateTime(1980),
-                lastDate: DateTime(2030),
-              );
-              print(date);
-              final time = await showTimePicker(
-                context: context,
-                initialTime: TimeOfDay.now(),
-              );
-              print(time);
+              // final date = await showDatePicker(
+              //   context: context,
+              //   initialDate: DateTime.now(),
+              //   firstDate: DateTime(1980),
+              //   lastDate: DateTime(2030),
+              // );
+              //print(date);
+              // final time = await showTimePicker(
+              //   context: context,
+              //   initialTime: TimeOfDay.now(),
+              // );
+              //print(time);
               final booking = await showDateRangePicker(
                 context: context,
                 firstDate: DateTime(1980),
@@ -79,7 +80,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   );
                 },
               );
-              print(booking);
+              //print(booking);
             },
             title: const Text("What is your birthday?"),
           ),
@@ -89,18 +90,66 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onTap: () {
               showCupertinoDialog(
                 context: context,
-                builder: (context) => const CupertinoAlertDialog(
-                  title: Text("Are you sure?"),
-                  content: Text("Plx dont go"),
+                builder: (context) => CupertinoAlertDialog(
+                  title: const Text("Are you sure?"),
+                  content: const Text("Plx dont go"),
                   actions: [
                     CupertinoDialogAction(
                       onPressed: () => Navigator.of(context).pop(),
-                      child: Text("No"),
+                      child: const Text("No"),
                     ),
                     CupertinoDialogAction(
                       onPressed: () => Navigator.of(context).pop(),
                       isDestructiveAction: true,
-                      child: Text("Yes"),
+                      child: const Text("Yes"),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text("Log out (android)"),
+            textColor: Colors.red,
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  icon: const FaIcon(FontAwesomeIcons.skull),
+                  title: const Text("Are you sure?"),
+                  content: const Text("Plx dont go"),
+                  actions: [
+                    IconButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      icon: const FaIcon(FontAwesomeIcons.car),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text("Yes"),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text("Log out (ios/Bottom)"),
+            textColor: Colors.red,
+            onTap: () {
+              showCupertinoModalPopup(
+                context: context,
+                builder: (context) => CupertinoActionSheet(
+                  title: const Text("Are you sure?"),
+                  message: const Text("Please doonnn goooo"),
+                  actions: [
+                    CupertinoActionSheetAction(
+                      isDefaultAction: true,
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text("Not log out"),
+                    ),
+                    CupertinoActionSheetAction(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text("Yes plz"),
                     ),
                   ],
                 ),
