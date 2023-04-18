@@ -29,6 +29,11 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return OrientationBuilder(
       builder: (context, orientation) {
+        // if (orientation == Orientation.landscape) {
+        //   return const Scaffold(
+        //     body: Center(child: Text("Plz rotate ur phone")),
+        //   );
+        // }
         return Scaffold(
           body: SafeArea(
             child: Padding(
@@ -52,15 +57,38 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   Gaps.v40,
-                  GestureDetector(
-                    onTap: () => _onEmailLoginTap(context),
-                    child: const AuthButton(
-                        icon: FaIcon(FontAwesomeIcons.solidUser),
-                        text: "Use Phone or Email"),
-                  ),
-                  const AuthButton(
-                      icon: FaIcon(FontAwesomeIcons.apple),
-                      text: "Continue with Apple"),
+                  if (orientation == Orientation.portrait) ...[
+                    GestureDetector(
+                      onTap: () => _onEmailLoginTap(context),
+                      child: const AuthButton(
+                          icon: FaIcon(FontAwesomeIcons.solidUser),
+                          text: "Use Phone or Email"),
+                    ),
+                    Gaps.v16,
+                    const AuthButton(
+                        icon: FaIcon(FontAwesomeIcons.apple),
+                        text: "Continue with Apple"),
+                  ],
+                  if (orientation == Orientation.landscape) ...[
+                    Row(
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () => _onEmailLoginTap(context),
+                            child: const AuthButton(
+                                icon: FaIcon(FontAwesomeIcons.solidUser),
+                                text: "Use Phone or Email"),
+                          ),
+                        ),
+                        Gaps.h16,
+                        const Expanded(
+                          child: AuthButton(
+                              icon: FaIcon(FontAwesomeIcons.apple),
+                              text: "Continue with Apple"),
+                        ),
+                      ],
+                    ),
+                  ]
                 ],
               ),
             ),

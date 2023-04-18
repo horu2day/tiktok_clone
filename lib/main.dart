@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
 import 'features/authentication/widgets/login_screen.dart';
 
-void main() {
+void main() async {
+  //1. 초기화시 모든걸 묶는다.
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await SystemChrome.setPreferredOrientations(
+    [DeviceOrientation.portraitUp],
+  );
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle.dark,
+  );
   runApp(const TikTokApp());
 }
 
@@ -26,7 +36,7 @@ class TikTokApp extends StatelessWidget {
         //highlightColor: Colors.transparent,
         appBarTheme: const AppBarTheme(
           foregroundColor: Colors.black,
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.black,
           elevation: 0,
           titleTextStyle: TextStyle(
             color: Colors.black,
