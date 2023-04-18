@@ -185,7 +185,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                               fit: BoxFit.cover,
                               placeholder: "assets/images/placeholder.jpg",
                               image:
-                                  "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.aladin.co.kr%2Fshop%2Fwproduct.aspx%3FItemId%3D179778753&psig=AOvVaw3aC4obAyj_KsIFzjLHEp9z&ust=1681119640549000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCJj-nurAnP4CFQAAAAAdAAAAABAJ",
+                                  "https://images.unsplash.com/photo-1673844969019-c99b0c933e90?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80",
                             ),
                           ),
                         ),
