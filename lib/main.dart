@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
-import 'features/authentication/widgets/login_screen.dart';
+import 'features/main_navigation/main_navigation_screen.dart';
 
 void main() async {
   //1. 초기화시 모든걸 묶는다.
@@ -12,7 +12,7 @@ void main() async {
     [DeviceOrientation.portraitUp],
   );
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle.dark,
+    SystemUiOverlayStyle.light,
   );
   runApp(const TikTokApp());
 }
@@ -46,8 +46,8 @@ class TikTokApp extends StatelessWidget {
         ),
       ),
       //home: const InterestsScreen(),
-      home: const LoginScreen(),
-      //home: const MainNavigationScreen(),
+      //home: const LoginScreen(),
+      home: const MainNavigationScreen(),
     );
   }
 }
