@@ -43,6 +43,7 @@ class _VideoPostState extends State<VideoPost>
     //_videoPlayerController.play();
     setState(() {});
     if (kIsWeb) {
+      // Web인지 아닌지 여부
       await _videoPlayerController.setVolume(0);
     }
     await _videoPlayerController.setLooping(true);
