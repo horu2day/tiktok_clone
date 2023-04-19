@@ -28,6 +28,7 @@ class _VideoPostState extends State<VideoPost>
   final Duration _animationDuration = const Duration(milliseconds: 200);
   late AnimationController _animationController;
   bool _isPaused = false;
+  bool _isNotMute = false;
 
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
@@ -101,6 +102,16 @@ class _VideoPostState extends State<VideoPost>
     setState(() {
       _isPaused = !_isPaused;
     });
+  }
+
+  void _onVolumeOnOff() {
+    if (kIsWeb) {
+      // Web인지 아닌지 여부
+      _videoPlayerController.setVolume(20);
+      setState(() {
+        _isNotMute = !_isNotMute;
+      });
+    }
   }
 
   Future<void> _onCommentTap(BuildContext context) async {
@@ -217,6 +228,16 @@ class _VideoPostState extends State<VideoPost>
                 const VideoButton(
                   icon: FontAwesomeIcons.share,
                   text: "Share",
+                ),
+                Gaps.v24,
+                GestureDetector(
+                  onTap: () => _onVolumeOnOff,
+                  child: VideoButton(
+                    icon: _isNotMute
+                        ? FontAwesomeIcons.volumeXmark
+                        : FontAwesomeIcons.volumeHigh,
+                    text: _isNotMute ? "mute" : "vol",
+                  ),
                 ),
               ],
             ),
