@@ -70,7 +70,6 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    print(width);
     return DefaultTabController(
       length: tabs.length,
       child: Scaffold(
@@ -78,64 +77,70 @@ class _DiscoverScreenState extends State<DiscoverScreen>
         appBar: AppBar(
           elevation: 1,
           centerTitle: true,
-          title: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Gaps.h10,
-                Expanded(
-                  child: SizedBox(
-                    height: Sizes.size44,
-                    child: TextField(
-                      controller: _textEditingController,
-                      onTap: _onStartWriting,
-                      cursorColor: Theme.of(context).primaryColor,
-                      decoration: InputDecoration(
-                        hintText: "Search",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            Sizes.size12,
+          title: ConstrainedBox(
+            constraints: const BoxConstraints(
+              maxWidth: Breakpoints.sm,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Gaps.h10,
+                  Expanded(
+                    child: SizedBox(
+                      height: Sizes.size44,
+                      child: TextField(
+                        controller: _textEditingController,
+                        onTap: _onStartWriting,
+                        cursorColor: Theme.of(context).primaryColor,
+                        decoration: InputDecoration(
+                          hintText: "Search",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(
+                              Sizes.size12,
+                            ),
+                            borderSide: BorderSide.none,
                           ),
-                          borderSide: BorderSide.none,
-                        ),
-                        filled: true,
-                        fillColor: Colors.grey.shade200,
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: Sizes.size10,
-                        ),
-                        prefixIcon: Padding(
-                          padding: const EdgeInsets.only(
-                            left: Sizes.size14,
-                            top: Sizes.size12,
+                          filled: true,
+                          fillColor: Colors.grey.shade200,
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: Sizes.size10,
                           ),
-                          child: FaIcon(
-                            FontAwesomeIcons.magnifyingGlass,
-                            color: Colors.grey.shade900,
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.only(
+                              left: Sizes.size14,
+                              top: Sizes.size12,
+                            ),
+                            child: FaIcon(
+                              FontAwesomeIcons.magnifyingGlass,
+                              color: Colors.grey.shade900,
+                            ),
                           ),
-                        ),
-                        suffixIcon: Padding(
-                          padding: const EdgeInsets.only(
-                            right: Sizes.size4,
-                          ),
-                          child: Row(mainAxisSize: MainAxisSize.min, children: [
-                            if (_isWriting)
-                              GestureDetector(
-                                onTap: _onStopWriting,
-                                child: FaIcon(
-                                  FontAwesomeIcons.circleXmark,
-                                  size: Sizes.size20,
-                                  color: Colors.grey.shade900,
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.only(
+                              right: Sizes.size4,
+                            ),
+                            child:
+                                Row(mainAxisSize: MainAxisSize.min, children: [
+                              if (_isWriting)
+                                GestureDetector(
+                                  onTap: _onStopWriting,
+                                  child: FaIcon(
+                                    FontAwesomeIcons.circleXmark,
+                                    size: Sizes.size20,
+                                    color: Colors.grey.shade900,
+                                  ),
                                 ),
-                              ),
-                          ]),
+                            ]),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                Gaps.h10,
-                const FaIcon(FontAwesomeIcons.sliders),
-              ],
+                  Gaps.h10,
+                  const FaIcon(FontAwesomeIcons.sliders),
+                ],
+              ),
             ),
           ),
           bottom: TabBar(

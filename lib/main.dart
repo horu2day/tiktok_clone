@@ -11,9 +11,9 @@ void main() async {
   await SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp],
   );
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle.light,
-  );
+  // SystemChrome.setSystemUIOverlayStyle(
+  //   SystemUiOverlayStyle.light,
+  // );
   runApp(const TikTokApp());
 }
 
