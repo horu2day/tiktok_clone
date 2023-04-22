@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
-import 'features/main_navigation/main_navigation_screen.dart';
+import 'features/authentication/widgets/sign_up_screen.dart';
 
 void main() async {
   //1. 초기화시 모든걸 묶는다.
@@ -26,7 +26,9 @@ class TikTokApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: true,
       title: 'TikTok Clone',
+      themeMode: ThemeMode.system,
       theme: ThemeData(
+        brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.white,
         primaryColor: const Color(0xffe9435a),
         textSelectionTheme: const TextSelectionThemeData(
@@ -44,10 +46,22 @@ class TikTokApp extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
+        bottomAppBarTheme: BottomAppBarTheme(
+          color: Colors.grey.shade100,
+        ),
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: Colors.black,
+        primaryColor: const Color(0xffe9435a),
+        bottomAppBarTheme: BottomAppBarTheme(
+          color: Colors.grey.shade900,
+        ),
       ),
       //home: const InterestsScreen(),
       //home: const LoginScreen(),
-      home: const MainNavigationScreen(),
+      home: const SignUpScreen(),
+      //home: const MainNavigationScreen(),
       //home: const LayoutBuilderCodeLab(),
     );
   }
