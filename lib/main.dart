@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
-import 'features/authentication/widgets/sign_up_screen.dart';
+import 'features/main_navigation/main_navigation_screen.dart';
 
 void main() async {
   //1. 초기화시 모든걸 묶는다.
@@ -41,7 +41,7 @@ class TikTokApp extends StatelessWidget {
         //highlightColor: Colors.transparent,
         appBarTheme: const AppBarTheme(
           foregroundColor: Colors.black,
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.white,
           elevation: 0,
           titleTextStyle: TextStyle(
             color: Colors.black,
@@ -52,8 +52,30 @@ class TikTokApp extends StatelessWidget {
         bottomAppBarTheme: BottomAppBarTheme(
           color: Colors.grey.shade100,
         ),
+        tabBarTheme: TabBarTheme(
+          labelColor: Colors.black,
+          unselectedLabelColor: Colors.grey.shade500,
+          //indicatorColor: Colors.black,
+          indicator: const UnderlineTabIndicator(
+            borderSide: BorderSide(
+              width: 2.0,
+              color: Colors.black,
+            ),
+          ),
+        ),
       ),
       darkTheme: ThemeData(
+        tabBarTheme: const TabBarTheme(
+          indicator: UnderlineTabIndicator(
+            borderSide: BorderSide(
+              width: 2.0,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Color(0xffe9435a),
+        ),
         brightness: Brightness.dark,
         textTheme: Typography.whiteMountainView,
         // textTheme: GoogleFonts.itimTextTheme(
@@ -70,8 +92,8 @@ class TikTokApp extends StatelessWidget {
       ),
       //home: const InterestsScreen(),
       //home: const LoginScreen(),
-      home: const SignUpScreen(),
-      //home: const MainNavigationScreen(),
+      //home: const SignUpScreen(),
+      home: const MainNavigationScreen(),
       //home: const LayoutBuilderCodeLab(),
     );
   }

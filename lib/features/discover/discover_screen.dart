@@ -154,9 +154,6 @@ class _DiscoverScreenState extends State<DiscoverScreen>
               fontSize: Sizes.size16,
             ),
             isScrollable: true,
-            indicatorColor: Colors.black,
-            labelColor: Colors.black,
-            unselectedLabelColor: Colors.grey.shade500,
             tabs: [
               for (var tab in tabs)
                 Tab(
@@ -199,11 +196,11 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                             ),
                           ),
                           Gaps.v10,
-                          Text(
-                            "${constraints.maxWidth} This is a very long caption for my tiktok that im upload just now currently.",
+                          const Text(
+                            "This is a very long caption for my tiktok that im upload just now currently.",
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: Sizes.size16 + Sizes.size2,
                               fontWeight: FontWeight.bold,
                             ),
