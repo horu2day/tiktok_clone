@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/breakpoints.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/utils.dart';
 
 final tabs = [
   "Top",
@@ -93,6 +94,10 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                         controller: _textEditingController,
                         onTap: _onStartWriting,
                         cursorColor: Theme.of(context).primaryColor,
+                        style: TextStyle(
+                          color:
+                              isDarkMode(context) ? Colors.white : Colors.black,
+                        ),
                         decoration: InputDecoration(
                           hintText: "Search",
                           border: OutlineInputBorder(
@@ -102,7 +107,9 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                             borderSide: BorderSide.none,
                           ),
                           filled: true,
-                          fillColor: Colors.grey.shade200,
+                          fillColor: isDarkMode(context)
+                              ? Colors.grey.shade800
+                              : Colors.grey.shade200,
                           contentPadding: const EdgeInsets.symmetric(
                             horizontal: Sizes.size10,
                           ),
@@ -221,22 +228,34 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                                         "https://avatars.githubusercontent.com/u/594733?s=400&u=51d0a83f972e0f874318c581a91cf0247a927773&v=4"),
                                   ),
                                   Gaps.h4,
-                                  const Expanded(
+                                  Expanded(
                                     child: Text(
                                       "My avartar is going to be very long",
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        color: isDarkMode(context)
+                                            ? Colors.grey.shade300
+                                            : Colors.grey.shade600,
+                                      ),
                                     ),
                                   ),
                                   Gaps.h4,
                                   FaIcon(
                                     FontAwesomeIcons.heart,
                                     size: Sizes.size16,
-                                    color: Colors.grey.shade600,
+                                    color: isDarkMode(context)
+                                        ? Colors.grey.shade300
+                                        : Colors.grey.shade600,
                                   ),
                                   Gaps.h2,
-                                  const Text(
+                                  Text(
                                     "2.5M",
+                                    style: TextStyle(
+                                      color: isDarkMode(context)
+                                          ? Colors.grey.shade300
+                                          : Colors.grey.shade600,
+                                    ),
                                   )
                                 ],
                               ),
