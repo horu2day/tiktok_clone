@@ -46,6 +46,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 SliverToBoxAdapter(
                   child: Column(
                     children: [
+                      Gaps.v20,
                       const CircleAvatar(
                         radius: 30,
                         foregroundColor: Colors.teal,
