@@ -75,7 +75,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     final isDark = isDarkMode(context);
     return Scaffold(
       resizeToAvoidBottomInset: false, // 키보드가 올라옴으로 인해 Body가 축소되는걸 막는다.
-      backgroundColor: _selectedIndex == 0 ? Colors.black : Colors.white,
+      backgroundColor:
+          _selectedIndex == 0 || isDark ? Colors.black : Colors.white,
       body: Stack(children: [
         Offstage(
           offstage: _selectedIndex != 0,
