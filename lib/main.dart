@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
-import 'features/main_navigation/main_navigation_screen.dart';
+import 'features/authentication/widgets/sign_up_screen.dart';
 
 void main() async {
   //1. 초기화시 모든걸 묶는다.
@@ -28,6 +28,7 @@ class TikTokApp extends StatelessWidget {
       title: 'TikTok Clone',
       themeMode: ThemeMode.system,
       theme: ThemeData(
+        useMaterial3: true,
         brightness: Brightness.light,
         textTheme: Typography.blackMountainView,
         //  구글폰트 사용법
@@ -42,6 +43,7 @@ class TikTokApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           foregroundColor: Colors.black,
           backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
           elevation: 0,
           titleTextStyle: TextStyle(
             color: Colors.black,
@@ -68,6 +70,7 @@ class TikTokApp extends StatelessWidget {
         ),
       ),
       darkTheme: ThemeData(
+        useMaterial3: true,
         tabBarTheme: const TabBarTheme(
           indicator: UnderlineTabIndicator(
             borderSide: BorderSide(
@@ -87,7 +90,13 @@ class TikTokApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.black,
         primaryColor: const Color(0xffe9435a),
         appBarTheme: AppBarTheme(
+          surfaceTintColor: Colors.grey.shade900,
           backgroundColor: Colors.grey.shade900,
+          titleTextStyle: const TextStyle(
+            color: Colors.white,
+            fontSize: Sizes.size16 + Sizes.size2,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         bottomAppBarTheme: BottomAppBarTheme(
           color: Colors.grey.shade900,
@@ -95,8 +104,8 @@ class TikTokApp extends StatelessWidget {
       ),
       //home: const InterestsScreen(),
       //home: const LoginScreen(),
-      //home: const SignUpScreen(),
-      home: const MainNavigationScreen(),
+      home: const SignUpScreen(),
+      //home: const MainNavigationScreen(),
       //home: const LayoutBuilderCodeLab(),
     );
   }

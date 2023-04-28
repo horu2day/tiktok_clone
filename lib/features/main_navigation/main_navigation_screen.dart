@@ -95,7 +95,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           child: const UserProfileScreen(),
         ),
       ]),
-      bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar: Container(
         color: _selectedIndex == 0 || isDark ? Colors.black : Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(Sizes.size12),
