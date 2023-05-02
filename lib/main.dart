@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
-import 'features/authentication/widgets/sign_up_screen.dart';
+import 'features/main_navigation/main_navigation_screen.dart';
 
 void main() async {
   //1. 초기화시 모든걸 묶는다.
@@ -26,6 +27,16 @@ class TikTokApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: true,
       title: 'TikTok Clone',
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale("en"),
+        Locale("ko"),
+        Locale("es"),
+      ],
       themeMode: ThemeMode.system,
       theme: ThemeData(
         useMaterial3: true,
@@ -71,8 +82,10 @@ class TikTokApp extends StatelessWidget {
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
-        tabBarTheme: const TabBarTheme(
-          indicator: UnderlineTabIndicator(
+        tabBarTheme: TabBarTheme(
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.grey.shade700,
+          indicator: const UnderlineTabIndicator(
             borderSide: BorderSide(
               width: 2.0,
               color: Colors.white,
@@ -97,6 +110,12 @@ class TikTokApp extends StatelessWidget {
             fontSize: Sizes.size16 + Sizes.size2,
             fontWeight: FontWeight.w600,
           ),
+          actionsIconTheme: IconThemeData(
+            color: Colors.grey.shade100,
+          ),
+          iconTheme: IconThemeData(
+            color: Colors.grey.shade100,
+          ),
         ),
         bottomAppBarTheme: BottomAppBarTheme(
           color: Colors.grey.shade900,
@@ -104,8 +123,8 @@ class TikTokApp extends StatelessWidget {
       ),
       //home: const InterestsScreen(),
       //home: const LoginScreen(),
-      home: const SignUpScreen(),
-      //home: const MainNavigationScreen(),
+      //home: const SettingsScreen(),
+      home: const MainNavigationScreen(),
       //home: const LayoutBuilderCodeLab(),
     );
   }

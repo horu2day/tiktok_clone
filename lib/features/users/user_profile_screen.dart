@@ -54,7 +54,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             "https://avatars.githubusercontent.com/u/594733?s=400&u=51d0a83f972e0f874318c581a91cf0247a927773&v=4"),
                         child: Text('카오'),
                       ),
-                      Gaps.v20,
+                      Gaps.v12,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -75,7 +75,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       ),
                       Gaps.v24,
                       SizedBox(
-                        height: Sizes.size44,
+                        height: Sizes.size52,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
