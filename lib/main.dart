@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
-import 'features/main_navigation/main_navigation_screen.dart';
+import 'features/authentication/widgets/login_screen.dart';
 
 void main() async {
   //1. 초기화시 모든걸 묶는다.
@@ -122,9 +122,9 @@ class TikTokApp extends StatelessWidget {
         ),
       ),
       //home: const InterestsScreen(),
-      //home: const LoginScreen(),
+      home: const LoginScreen(),
       //home: const SettingsScreen(),
-      home: const MainNavigationScreen(),
+      //home: const MainNavigationScreen(),
       //home: const LayoutBuilderCodeLab(),
     );
   }
