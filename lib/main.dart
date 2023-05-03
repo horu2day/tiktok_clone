@@ -4,7 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import "package:flutter_gen/gen_l10n/intl_generated.dart";
 
-import 'features/authentication/widgets/login_screen.dart';
+import 'features/authentication/widgets/sign_up_screen.dart';
 
 void main() async {
   //1. 초기화시 모든걸 묶는다.
@@ -124,7 +124,7 @@ class TikTokApp extends StatelessWidget {
         ),
       ),
       //home: const InterestsScreen(),
-      home: const LoginScreen(),
+      home: const SignUpScreen(),
       //home: const SettingsScreen(),
       //home: const MainNavigationScreen(),
       //home: const LayoutBuilderCodeLab(),
