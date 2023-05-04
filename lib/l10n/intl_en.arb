@@ -8,5 +8,15 @@
                 "example":"TikTok"
             }
         }
+    },
+    "loginTitle":"Log into your {nameOfTheApp} account",
+    "@loginTitle": {
+        "description":"The title people see when they open the log in screen",
+        "placeholders":{
+            "nameOfTheApp": {
+                "type": "String",
+                "example":"TikTok"
+            }
+        }
     }
 }

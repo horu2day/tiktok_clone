@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import "package:flutter_gen/gen_l10n/intl_generated.dart";
 
 import 'features/authentication/widgets/sign_up_screen.dart';
 
@@ -29,7 +28,6 @@ class TikTokApp extends StatelessWidget {
       debugShowCheckedModeBanner: true,
       title: 'TikTok Clone',
       localizationsDelegates: const [
-        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -37,7 +35,6 @@ class TikTokApp extends StatelessWidget {
       supportedLocales: const [
         Locale("en"),
         Locale("ko"),
-        Locale("es"),
       ],
       themeMode: ThemeMode.system,
       theme: ThemeData(
