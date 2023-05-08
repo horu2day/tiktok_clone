@@ -69,6 +69,56 @@ class S {
       args: [nameOfTheApp],
     );
   }
+
+  /// `Create a pro file, follow other account, make your own videos, and more.`
+  String get signUpSubtitle {
+    return Intl.message(
+      'Create a pro file, follow other account, make your own videos, and more.',
+      name: 'signUpSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use Phone or Email`
+  String get emailPasswordButton {
+    return Intl.message(
+      'Use Phone or Email',
+      name: 'emailPasswordButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue with Apple`
+  String get appleButton {
+    return Intl.message(
+      'Continue with Apple',
+      name: 'appleButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already have an acount?`
+  String get alreadyHaveAnAcount {
+    return Intl.message(
+      'Already have an acount?',
+      name: 'alreadyHaveAnAcount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log in`
+  String get logIn {
+    return Intl.message(
+      'Log in',
+      name: 'logIn',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

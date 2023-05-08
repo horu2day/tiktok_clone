@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
 import 'features/authentication/widgets/sign_up_screen.dart';
+import 'generated/l10n.dart';
 
 void main() async {
   //1. 초기화시 모든걸 묶는다.
@@ -28,6 +29,7 @@ class TikTokApp extends StatelessWidget {
       debugShowCheckedModeBanner: true,
       title: 'TikTok Clone',
       localizationsDelegates: const [
+        S.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
