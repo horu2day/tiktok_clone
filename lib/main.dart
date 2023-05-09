@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
 import 'features/main_navigation/main_navigation_screen.dart';
+
 import 'generated/l10n.dart';
 
 void main() async {
