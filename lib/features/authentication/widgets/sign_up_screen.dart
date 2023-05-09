@@ -70,11 +70,11 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               Gaps.v20,
-              const Opacity(
+              Opacity(
                 opacity: 0.7,
                 child: Text(
-                  "Create a pro file, follow other account, make your own videos, and more.",
-                  style: TextStyle(
+                  S.of(context).signUpSubtitle(33425),
+                  style: const TextStyle(
                     fontSize: Sizes.size16,
                   ),
                 ),
@@ -82,14 +82,14 @@ class SignUpScreen extends StatelessWidget {
               Gaps.v40,
               GestureDetector(
                 onTap: () => _onEmailTap(context),
-                child: const AuthButton(
-                    icon: FaIcon(FontAwesomeIcons.solidUser),
-                    text: "Use Phone or Email"),
+                child: AuthButton(
+                    icon: const FaIcon(FontAwesomeIcons.solidUser),
+                    text: S.of(context).emailPasswordButton),
               ),
               Gaps.v10,
-              const AuthButton(
-                  icon: FaIcon(FontAwesomeIcons.apple),
-                  text: "Continue with Apple")
+              AuthButton(
+                  icon: const FaIcon(FontAwesomeIcons.apple),
+                  text: S.of(context).appleButton)
             ],
           ),
         ),
@@ -104,12 +104,12 @@ class SignUpScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('Already have an acount?'),
+              Text(S.of(context).alreadyHaveAnAcount),
               Gaps.h5,
               GestureDetector(
                 onTap: () => _onLoginTap(context),
                 child: Text(
-                  'Log in',
+                  S.of(context).logIn("female"),
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: Theme.of(context).primaryColor),

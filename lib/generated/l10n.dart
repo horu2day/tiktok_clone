@@ -69,6 +69,76 @@ class S {
       args: [nameOfTheApp],
     );
   }
+
+  /// `Create a pro file, follow other account, make your own {videoCount, plural, =0{no videos} =1 {video} other{videos}}, and more.`
+  String signUpSubtitle(num videoCount) {
+    return Intl.message(
+      'Create a pro file, follow other account, make your own ${Intl.plural(videoCount, zero: 'no videos', one: 'video', other: 'videos')}, and more.',
+      name: 'signUpSubtitle',
+      desc: '',
+      args: [videoCount],
+    );
+  }
+
+  /// `Use Phone or Email`
+  String get emailPasswordButton {
+    return Intl.message(
+      'Use Phone or Email',
+      name: 'emailPasswordButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue with Apple`
+  String get appleButton {
+    return Intl.message(
+      'Continue with Apple',
+      name: 'appleButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already have an acount?`
+  String get alreadyHaveAnAcount {
+    return Intl.message(
+      'Already have an acount?',
+      name: 'alreadyHaveAnAcount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log in {gender, select, male{sir} female{madam} other{human}}`
+  String logIn(String gender) {
+    return Intl.message(
+      'Log in ${Intl.gender(gender, male: 'sir', female: 'madam', other: 'human')}',
+      name: 'logIn',
+      desc: '',
+      args: [gender],
+    );
+  }
+
+  /// `2.9M`
+  String get likeCount {
+    return Intl.message(
+      '2.9M',
+      name: 'likeCount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `33K`
+  String get commentCount {
+    return Intl.message(
+      '33K',
+      name: 'commentCount',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
