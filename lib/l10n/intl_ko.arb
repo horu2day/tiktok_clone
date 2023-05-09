@@ -4,5 +4,7 @@
   "emailPasswordButton": "Use Phone or Email",
   "appleButton": "Continue with Apple",
   "alreadyHaveAnAcount": "Already have an acount?",
-  "logIn": "Log in"
+  "logIn": "Log in",
+  "likeCount": "{value}",
+  "commentCount": "{value}"
 }

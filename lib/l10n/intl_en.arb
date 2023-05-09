@@ -19,9 +19,11 @@
       }
     }
   },
-  "signUpSubtitle": "Create a pro file, follow other account, make your own videos, and more.",
+  "signUpSubtitle": "Create a pro file, follow other account, make your own {videoCount, plural, =0{no videos} =1 {video} other{videos}}, and more.",
   "emailPasswordButton": "Use Phone or Email",
   "appleButton": "Continue with Apple",
   "alreadyHaveAnAcount": "Already have an acount?",
-  "logIn": "Log in"
+  "logIn": "Log in {gender, select, male{sir} female{madam} other{human}}",
+  "likeCount": "2.9M",
+  "commentCount": "33K"
 }
