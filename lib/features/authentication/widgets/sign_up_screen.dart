@@ -31,8 +31,12 @@ class SignUpScreen extends StatelessWidget {
         // 아래 리턴되는 child 는 pageBuilder가 만들어내는 무엇을 말함.
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           final offsetAnimation = Tween(
-            begin: const Offset(0, -1),
+            begin: const Offset(0, 1), // -1 이면 위에서 떨어지는 1 이면 아래에서 올라온다.
             end: Offset.zero,
+          ).animate(animation);
+          final opacityAmimation = Tween(
+            begin: 0.5,
+            end: 1.0,
           ).animate(animation);
           return SlideTransition(
             position: offsetAnimation,
@@ -63,7 +67,7 @@ class SignUpScreen extends StatelessWidget {
             children: [
               Gaps.v80,
               Text(
-                S.of(context).signUpTitle("TikTok"),
+                S.of(context).signUpTitle("TikTok", DateTime.now()),
                 style: const TextStyle(
                   fontSize: Sizes.size24,
                   fontWeight: FontWeight.w700,

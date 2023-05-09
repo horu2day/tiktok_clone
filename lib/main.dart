@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
-import 'features/main_navigation/main_navigation_screen.dart';
+import 'features/authentication/widgets/sign_up_screen.dart';
 
 import 'generated/l10n.dart';
 
@@ -125,9 +125,9 @@ class TikTokApp extends StatelessWidget {
         ),
       ),
       //home: const InterestsScreen(),
-      //home: const SignUpScreen(),
+      home: const SignUpScreen(),
       //home: const SettingsScreen(),
-      home: const MainNavigationScreen(),
+      //home: const MainNavigationScreen(),
       //home: const LayoutBuilderCodeLab(),
     );
   }
