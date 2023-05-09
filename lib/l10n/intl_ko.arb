@@ -6,5 +6,6 @@
   "alreadyHaveAnAcount": "Already have an acount?",
   "logIn": "Log in",
   "likeCount": "{value}",
-  "commentCount": "{value}"
+  "commentCount": "{value}",
+  "commentTitle": "{value} {value2, plural, =0{comments} =1 {comment} other{comments}}"
 }

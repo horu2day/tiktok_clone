@@ -120,23 +120,48 @@ class S {
     );
   }
 
-  /// `2.9M`
-  String get likeCount {
+  /// `{value}`
+  String likeCount(int value) {
+    final NumberFormat valueNumberFormat = NumberFormat.compact(
+      locale: Intl.getCurrentLocale(),
+    );
+    final String valueString = valueNumberFormat.format(value);
+
     return Intl.message(
-      '2.9M',
+      '$valueString',
       name: 'likeCount',
-      desc: '',
-      args: [],
+      desc: 'Anything you want',
+      args: [valueString],
     );
   }
 
-  /// `33K`
-  String get commentCount {
+  /// `{value}`
+  String commentCount(int value) {
+    final NumberFormat valueNumberFormat = NumberFormat.compact(
+      locale: Intl.getCurrentLocale(),
+    );
+    final String valueString = valueNumberFormat.format(value);
+
     return Intl.message(
-      '33K',
+      '$valueString',
       name: 'commentCount',
-      desc: '',
-      args: [],
+      desc: 'Anything you want',
+      args: [valueString],
+    );
+  }
+
+  /// `{value} {value2, plural, =0{comments} =1 {comment} other{comments}}`
+  String commentTitle(int value, num value2) {
+    final NumberFormat valueNumberFormat = NumberFormat.compactCurrency(
+      locale: Intl.getCurrentLocale(),
+    );
+    final String valueString = valueNumberFormat.format(value);
+
+    return Intl.message(
+      '$valueString ${Intl.plural(value2, zero: 'comments', one: 'comment', other: 'comments')}',
+      name: 'commentTitle',
+      desc: 'Anything you want',
+      args: [valueString, value2],
     );
   }
 }

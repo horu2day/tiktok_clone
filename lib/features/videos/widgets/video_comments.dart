@@ -4,6 +4,8 @@ import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/utils.dart';
 
+import '../../../generated/l10n.dart';
+
 class VideoComments extends StatefulWidget {
   const VideoComments({super.key});
 
@@ -48,7 +50,7 @@ class _VideoCommentsState extends State<VideoComments> {
           backgroundColor: isDark ? null : Colors.grey.shade50,
           centerTitle: true,
           automaticallyImplyLeading: false, //뒤로가기 화살표 없애기
-          title: const Text("22729 comments"),
+          title: Text(S.of(context).commentTitle(100000, 100000)),
           actions: [
             IconButton(
               onPressed: _onClosePressed,

@@ -24,6 +24,34 @@
   "appleButton": "Continue with Apple",
   "alreadyHaveAnAcount": "Already have an acount?",
   "logIn": "Log in {gender, select, male{sir} female{madam} other{human}}",
-  "likeCount": "2.9M",
-  "commentCount": "33K"
+  "likeCount": "{value}",
+  "@likeCount": {
+    "description": "Anything you want",
+    "placeholders": {
+      "value": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+  "commentCount": "{value}",
+  "@commentCount": {
+    "description": "Anything you want",
+    "placeholders": {
+      "value": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+  "commentTitle": "{value} {value2, plural, =0{comments} =1 {comment} other{comments}}",
+  "@commentTitle": {
+    "description": "Anything you want",
+    "placeholders": {
+      "value": {
+        "type": "int",
+        "format": "compactCurrency"
+      }
+    }
+  }
 }
