@@ -6,6 +6,7 @@ import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 import 'package:tiktok_clone/features/authentication/widgets/login_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/username_screen.dart';
+import 'package:tiktok_clone/generated/l10n.dart';
 import 'package:tiktok_clone/utils.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -21,22 +22,35 @@ class SignUpScreen extends StatelessWidget {
 
   void _onEmailTap(BuildContext context) {
     Navigator.of(context).push(PageRouteBuilder(
-      transitionDuration: const Duration(
-        seconds: 3,
-      ),
-      reverseTransitionDuration: const Duration(seconds: 3),
-      pageBuilder: (context, amimation, secondaryAnimation) =>
-          const UsernameScreen(),
-      // 아래 리턴되는 child 는 pageBuilder가 만들어내는 무엇을 말함.
-      transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-          ScaleTransition(
-        scale: animation,
-        child: FadeTransition(
-          opacity: animation,
-          child: child,
+        transitionDuration: const Duration(
+          seconds: 1,
         ),
-      ),
-    ));
+        reverseTransitionDuration: const Duration(seconds: 1),
+        pageBuilder: (context, amimation, secondaryAnimation) =>
+            const UsernameScreen(),
+        // 아래 리턴되는 child 는 pageBuilder가 만들어내는 무엇을 말함.
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          final offsetAnimation = Tween(
+            begin: const Offset(0, -1),
+            end: Offset.zero,
+          ).animate(animation);
+          return SlideTransition(
+            position: offsetAnimation,
+            child: FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
+          );
+        }
+        //     ScaleTransition(
+        //   scale: animation,
+        //   child: FadeTransition(
+        //     opacity: animation,
+        //     child: child,
+        //   ),
+        // ),
+
+        ));
   }
 
   @override
@@ -48,9 +62,9 @@ class SignUpScreen extends StatelessWidget {
           child: Column(
             children: [
               Gaps.v80,
-              const Text(
-                "Sign Up to TikTok",
-                style: TextStyle(
+              Text(
+                S.of(context).signUpTitle("TikTok"),
+                style: const TextStyle(
                   fontSize: Sizes.size24,
                   fontWeight: FontWeight.w700,
                 ),
