@@ -4,17 +4,21 @@ import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
+import 'package:tiktok_clone/features/authentication/widgets/login_screen.dart';
+import 'package:tiktok_clone/features/authentication/widgets/username_screen.dart';
 import 'package:tiktok_clone/generated/l10n.dart';
 import 'package:tiktok_clone/utils.dart';
 
 class SignUpScreen extends StatelessWidget {
+  static String routeName = "/";
   const SignUpScreen({super.key});
   void _onLoginTap(BuildContext context) async {
-    Navigator.of(context).pushNamed("/login");
+    final result = Navigator.of(context).pushNamed(LoginScreen.routeName);
+    print(result);
   }
 
   void _onEmailTap(BuildContext context) {
-    Navigator.of(context).pushNamed("/username");
+    Navigator.of(context).pushNamed(UsernameScreen.routeName);
     //아래는 #17.2 PageRouteBuilder 코드임
     /*Navigator.of(context).push(PageRouteBuilder(
         transitionDuration: const Duration(

@@ -126,11 +126,11 @@ class TikTokApp extends StatelessWidget {
           color: Colors.grey.shade900,
         ),
       ),
-      initialRoute: "/", //시작하는 home 을 말함.
+      initialRoute: SignUpScreen.routeName, //시작하는 home 을 말함.
       routes: {
-        "/": (context) => const SignUpScreen(),
-        "/username": (context) => const UsernameScreen(),
-        "/login": (context) => const LoginScreen(),
+        SignUpScreen.routeName: (context) => const SignUpScreen(),
+        UsernameScreen.routeName: (context) => const UsernameScreen(),
+        LoginScreen.routeName: (context) => const LoginScreen(),
       },
       //home: const InterestsScreen(),
       //home: const SignUpScreen(),
