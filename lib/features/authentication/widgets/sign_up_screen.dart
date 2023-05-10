@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
@@ -13,12 +14,14 @@ class SignUpScreen extends StatelessWidget {
   static String routeName = "/";
   const SignUpScreen({super.key});
   void _onLoginTap(BuildContext context) async {
-    final result = Navigator.of(context).pushNamed(LoginScreen.routeName);
-    print(result);
+    context.push(LoginScreen.routeName);
+    // final result = Navigator.of(context).pushNamed(LoginScreen.routeName);
+    // print(result);
   }
 
   void _onEmailTap(BuildContext context) {
-    Navigator.of(context).pushNamed(UsernameScreen.routeName);
+    context.push(UsernameScreen.routeName);
+    //Navigator.of(context).pushNamed(UsernameScreen.routeName);
     //아래는 #17.2 PageRouteBuilder 코드임
     /*Navigator.of(context).push(PageRouteBuilder(
         transitionDuration: const Duration(

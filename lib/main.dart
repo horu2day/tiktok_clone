@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/features/authentication/widgets/email_screen.dart';
-import 'package:tiktok_clone/features/authentication/widgets/login_screen.dart';
-import 'package:tiktok_clone/features/authentication/widgets/username_screen.dart';
-
-import 'features/authentication/widgets/sign_up_screen.dart';
+import 'package:tiktok_clone/router.dart';
 
 import 'generated/l10n.dart';
 
@@ -30,7 +26,8 @@ class TikTokApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     S.load(const Locale("en"));
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       debugShowCheckedModeBanner: true,
       title: 'TikTok Clone',
       localizationsDelegates: const [
@@ -127,13 +124,15 @@ class TikTokApp extends StatelessWidget {
           color: Colors.grey.shade900,
         ),
       ),
-      initialRoute: SignUpScreen.routeName, //시작하는 home 을 말함.
-      routes: {
-        SignUpScreen.routeName: (context) => const SignUpScreen(),
-        UsernameScreen.routeName: (context) => const UsernameScreen(),
-        LoginScreen.routeName: (context) => const LoginScreen(),
-        EmailScreen.routeName: (context) => const EmailScreen()
-      },
+      // go_router 쓰지않을때
+      // initialRoute: SignUpScreen.routeName, //시작하는 home 을 말함.
+      // routes: {
+      //   SignUpScreen.routeName: (context) => const SignUpScreen(),
+      //   UsernameScreen.routeName: (context) => const UsernameScreen(),
+      //   LoginScreen.routeName: (context) => const LoginScreen(),
+      //   EmailScreen.routeName: (context) => const EmailScreen()
+      // },
+      //최초
       //home: const InterestsScreen(),
       //home: const SignUpScreen(),
       //home: const SettingsScreen(),
