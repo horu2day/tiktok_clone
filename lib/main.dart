@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/authentication/widgets/login_screen.dart';
+import 'package:tiktok_clone/features/authentication/widgets/username_screen.dart';
 
 import 'features/authentication/widgets/sign_up_screen.dart';
 
@@ -124,8 +126,14 @@ class TikTokApp extends StatelessWidget {
           color: Colors.grey.shade900,
         ),
       ),
+      initialRoute: "/", //시작하는 home 을 말함.
+      routes: {
+        "/": (context) => const SignUpScreen(),
+        "/username": (context) => const UsernameScreen(),
+        "/login": (context) => const LoginScreen(),
+      },
       //home: const InterestsScreen(),
-      home: const SignUpScreen(),
+      //home: const SignUpScreen(),
       //home: const SettingsScreen(),
       //home: const MainNavigationScreen(),
       //home: const LayoutBuilderCodeLab(),
