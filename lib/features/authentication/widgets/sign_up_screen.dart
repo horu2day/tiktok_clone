@@ -11,7 +11,8 @@ import 'package:tiktok_clone/generated/l10n.dart';
 import 'package:tiktok_clone/utils.dart';
 
 class SignUpScreen extends StatelessWidget {
-  static String routeName = "/";
+  static const String routeURL = "/";
+  static const String routeName = "signUp";
   const SignUpScreen({super.key});
   void _onLoginTap(BuildContext context) async {
     context.push(LoginScreen.routeName);
@@ -20,7 +21,7 @@ class SignUpScreen extends StatelessWidget {
   }
 
   void _onEmailTap(BuildContext context) {
-    context.push(UsernameScreen.routeName);
+    context.pushNamed(UsernameScreen.routeName);
     //Navigator.of(context).pushNamed(UsernameScreen.routeName);
     //아래는 #17.2 PageRouteBuilder 코드임
     /*Navigator.of(context).push(PageRouteBuilder(
