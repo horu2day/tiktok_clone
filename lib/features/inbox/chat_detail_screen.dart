@@ -71,9 +71,9 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
             ),
           ),
           subtitle: const Text('Active now'),
-          trailing: Row(
+          trailing: const Row(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               FaIcon(
                 FontAwesomeIcons.flag,
                 color: Colors.black,

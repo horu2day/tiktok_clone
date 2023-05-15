@@ -192,9 +192,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         ),
                       ),
                       Gaps.v14,
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           FaIcon(
                             FontAwesomeIcons.link,
                             size: Sizes.size12,
