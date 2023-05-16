@@ -60,24 +60,45 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       // 권한을 가지고 있지 않거나 카메라가 초기화 되지 않았으면
-      body: !_hasPermission || !_cameraController.value.isInitialized
-          ? SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: const Column(
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: !_hasPermission || !_cameraController.value.isInitialized
+            ? Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "Initializing...",
-                    style:
-                        TextStyle(color: Colors.white, fontSize: Sizes.size20),
-                  ),
-                  Gaps.v20,
-                  CircularProgressIndicator.adaptive(),
+                  _deniedPermission
+                      ? const Column(
+                          children: [
+                            Text(
+                              "셋팅으로 가서 카메라와 마이크를 허용해 주세요...",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: Sizes.size20),
+                            ),
+                            Gaps.v20,
+                            CircularProgressIndicator.adaptive(),
+                          ],
+                        )
+                      : const Column(
+                          children: [
+                            Text(
+                              "Initializing...",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: Sizes.size20),
+                            ),
+                            Gaps.v20,
+                            CircularProgressIndicator.adaptive(),
+                          ],
+                        )
+                ],
+              )
+            : Stack(
+                alignment: Alignment.center,
+                children: [
+                  CameraPreview(_cameraController),
                 ],
               ),
-            )
-          : CameraPreview(_cameraController),
+      ),
     );
   }
 }
