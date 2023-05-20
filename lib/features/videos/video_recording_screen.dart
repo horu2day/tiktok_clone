@@ -4,6 +4,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../../constants/gaps.dart';
 import '../../constants/sizes.dart';
+import 'widgets/flash_mode_button.dart';
 
 class VideoRecordingScreen extends StatefulWidget {
   const VideoRecordingScreen({super.key});
@@ -125,36 +126,25 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen> {
                             ),
                           ),
                           Gaps.v10,
-                          IconButton(
-                            color: _flashMode == FlashMode.off
-                                ? Colors.amber.shade200
-                                : Colors.white,
-                            onPressed: () {}, //=> _setFlashMode(FlashMode.off),
-                            icon: const Icon(
-                              Icons.flash_off_rounded,
-                            ),
+                          FlashModeButton(
+                            flashMode: _flashMode,
+                            flashType: FlashMode.off,
+                            setFlashMode: _setFlashMode,
+                            iconData: Icons.flash_off_rounded,
                           ),
                           Gaps.v10,
-                          IconButton(
-                            color: _flashMode == FlashMode.always
-                                ? Colors.amber.shade200
-                                : Colors.white,
-                            onPressed:
-                                () {}, //=> _setFlashMode(FlashMode.always),
-                            icon: const Icon(
-                              Icons.flash_on_rounded,
-                            ),
+                          FlashModeButton(
+                            flashMode: _flashMode,
+                            flashType: FlashMode.always,
+                            setFlashMode: _setFlashMode,
+                            iconData: Icons.flash_on_rounded,
                           ),
                           Gaps.v10,
-                          IconButton(
-                            color: _flashMode == FlashMode.auto
-                                ? Colors.amber.shade200
-                                : Colors.white,
-                            onPressed:
-                                () {}, //=> _setFlashMode(FlashMode.auto),
-                            icon: const Icon(
-                              Icons.flash_auto_rounded,
-                            ),
+                          FlashModeButton(
+                            flashMode: _flashMode,
+                            flashType: FlashMode.auto,
+                            setFlashMode: _setFlashMode,
+                            iconData: Icons.flash_auto_rounded,
                           ),
                           Gaps.v10,
                           FlashModeButton(
@@ -167,31 +157,6 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen> {
                       )),
                 ],
               ),
-      ),
-    );
-  }
-}
-
-class FlashModeButton extends StatelessWidget {
-  const FlashModeButton({
-    super.key,
-    required this.flashMode,
-    required this.flashType,
-    required this.setFlashMode,
-    required this.iconData,
-  });
-
-  final FlashMode flashMode;
-  final FlashMode flashType;
-  final IconData iconData;
-  final Future<void> Function(FlashMode newFlashMode) setFlashMode;
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      color: flashMode == flashType ? Colors.amber.shade200 : Colors.white,
-      onPressed: () => setFlashMode(flashType),
-      icon: Icon(
-        iconData,
       ),
     );
   }
