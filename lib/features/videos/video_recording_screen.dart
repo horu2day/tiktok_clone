@@ -40,7 +40,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
 
   late FlashMode _flashMode;
   late CameraController _cameraController;
-
+  late double _maxZoom;
   @override
   didChangeAppLifecycleState(AppLifecycleState state) {
     if (!_hasPermission) return;
@@ -68,7 +68,8 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     await _cameraController.prepareForVideoRecording();
 
     _flashMode = _cameraController.value.flashMode;
-
+    _maxZoom = await _cameraController.getMaxZoomLevel();
+    print(_maxZoom);
     setState(() {});
   }
 
@@ -133,6 +134,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
 
     _buttonAnimationController.forward();
     _progressAnimationController.forward();
+    ppZoom = 0.0;
   }
 
   Future<void> _stopRecording() async {
@@ -168,6 +170,16 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
             isPicked: true,
           ),
         ));
+  }
+
+  double ppZoom = 0.0;
+  Future<void> _onPanUpdate(DragUpdateDetails details) async {
+    ppZoom = ppZoom - details.delta.dy;
+    var zoom = ppZoom / _maxZoom;
+    print(ppZoom);
+    print(zoom);
+    await _cameraController.setZoomLevel(zoom);
+    setState(() {});
   }
 
   @override
@@ -261,6 +273,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                       children: [
                         const Spacer(),
                         GestureDetector(
+                          onPanUpdate: _onPanUpdate,
                           onTapDown: _startRecording,
                           onTapUp: (details) => _stopRecording(),
                           child: ScaleTransition(
