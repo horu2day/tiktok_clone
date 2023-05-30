@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
@@ -29,12 +30,14 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   }
 
   void onNextTap() {
-    Navigator.of(context).pushAndRemoveUntil(
+    // 뒤로 못돌아 가고 interestScreen이 처음이 됨.
+    context.pushReplacementNamed(InterestsScreen.routeName);
+    /* Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (context) => const InterestsScreen(),
       ),
       (route) => false,
-    );
+    ); */
   }
 
   void _onScaffoldTap() {

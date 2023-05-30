@@ -15,13 +15,19 @@ class SignUpScreen extends StatelessWidget {
   static const String routeName = "signUp";
   const SignUpScreen({super.key});
   void _onLoginTap(BuildContext context) async {
-    context.push(LoginScreen.routeName);
+    context.pushNamed(LoginScreen.routeName);
     // final result = Navigator.of(context).pushNamed(LoginScreen.routeName);
     // print(result);
   }
 
   void _onEmailTap(BuildContext context) {
-    context.pushNamed(UsernameScreen.routeName);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const UsernameScreen(),
+      ),
+    );
+    //context.pushNamed(UsernameScreen.routeName);
     //Navigator.of(context).pushNamed(UsernameScreen.routeName);
     //아래는 #17.2 PageRouteBuilder 코드임
     /*Navigator.of(context).push(PageRouteBuilder(
