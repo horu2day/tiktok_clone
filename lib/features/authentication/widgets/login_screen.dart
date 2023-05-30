@@ -6,6 +6,8 @@ import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 import 'package:tiktok_clone/utils.dart';
 
+import 'login_form_screen.dart';
+
 class LoginScreen extends StatelessWidget {
   static String routeName = "login";
   static String routeURL = "/login";
@@ -18,11 +20,12 @@ class LoginScreen extends StatelessWidget {
 
   void _onEmailLoginTap(BuildContext context) {
     //context.push(EmailScreen.routeName);
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(
-    //     builder: (context) => const LoginFormScreen(),
-    //   ),
-    // );
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const LoginFormScreen(),
+      ),
+    );
   }
 
   @override

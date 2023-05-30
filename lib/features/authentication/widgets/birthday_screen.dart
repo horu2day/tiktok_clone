@@ -31,7 +31,7 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
 
   void onNextTap() {
     // 뒤로 못돌아 가고 interestScreen이 처음이 됨.
-    context.pushReplacementNamed(InterestsScreen.routeName);
+    context.goNamed(InterestsScreen.routeName);
     /* Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (context) => const InterestsScreen(),
