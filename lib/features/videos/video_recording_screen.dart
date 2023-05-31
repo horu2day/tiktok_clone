@@ -13,6 +13,8 @@ import '../../constants/sizes.dart';
 import 'widgets/flash_mode_button.dart';
 
 class VideoRecordingScreen extends StatefulWidget {
+  static const String routeName = "postVideo";
+  static const String routeURL = "/upload";
   const VideoRecordingScreen({super.key});
 
   @override
@@ -24,7 +26,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   bool _hasPermission = false;
   bool _deniedPermission = false;
   bool _isSelfieMode = false;
-  late final bool _noCamera = kDebugMode && Platform.isIOS;
+  late final bool _noCamera = kDebugMode && Platform.isAndroid;
   late final AnimationController _buttonAnimationController =
       AnimationController(
     vsync: this,
