@@ -26,7 +26,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   bool _hasPermission = false;
   bool _deniedPermission = false;
   bool _isSelfieMode = false;
-  late final bool _noCamera = kDebugMode && Platform.isAndroid;
+  late final bool _noCamera = kDebugMode && Platform.isIOS;
   late final AnimationController _buttonAnimationController =
       AnimationController(
     vsync: this,
@@ -48,6 +48,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   late double _maxZoom;
   @override
   didChangeAppLifecycleState(AppLifecycleState state) {
+    if (!_noCamera) return;
     if (!_hasPermission) return;
     if (!_cameraController.value.isInitialized) return;
     if (state == AppLifecycleState.inactive) {
@@ -122,7 +123,9 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   void dispose() {
     _progressAnimationController.dispose();
     _buttonAnimationController.dispose();
-    _cameraController.dispose();
+    if (!_noCamera) {
+      _cameraController.dispose();
+    }
     super.dispose();
   }
 
@@ -235,6 +238,13 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                 children: [
                   if (!_noCamera && _cameraController.value.isInitialized)
                     CameraPreview(_cameraController),
+                  const Positioned(
+                    top: Sizes.size40,
+                    left: Sizes.size20,
+                    child: CloseButton(
+                      color: Colors.white,
+                    ),
+                  ),
                   if (!_noCamera)
                     Positioned(
                       top: Sizes.size20,
