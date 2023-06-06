@@ -33,6 +33,8 @@ class _VideoPostState extends State<VideoPost>
   bool _isPaused = false;
   bool _isNotMute = false;
 
+  bool _autoMute = videoConfig.autoMute;
+
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
       if (_videoPlayerController.value.duration ==
@@ -67,11 +69,15 @@ class _VideoPostState extends State<VideoPost>
       duration: _animationDuration,
     );
     // 2번 방법 : AnimatedBuilder를 사용하는 방법 -> 위젯에서 직접 사용
-
     // 1번 방법
     // _animationController.addListener(() {
     //   setState(() {});
     // });
+    videoConfig.addListener(() {
+      setState(() {
+        _autoMute = videoConfig.autoMute;
+      });
+    });
   }
 
   @override
@@ -184,14 +190,13 @@ class _VideoPostState extends State<VideoPost>
               top: 40,
               child: IconButton(
                 icon: FaIcon(
-                  VideoConfigData.of(context).autoMute
+                  _autoMute // VideoConfigData.of(context).autoMute
                       ? FontAwesomeIcons.volumeOff
                       : FontAwesomeIcons.volumeHigh,
                   color: Colors.white,
                 ),
-                onPressed: () {
-                  VideoConfigData.of(context).toggleMuted();
-                },
+                onPressed: videoConfig.toggleAutoMute,
+                //VideoConfigData.of(context).toggleMuted();
               )),
           const Positioned(
             bottom: 20,
