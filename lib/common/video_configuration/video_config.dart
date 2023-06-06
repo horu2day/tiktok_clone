@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 
-class VideoConfig extends ChangeNotifier {
-  bool autoMute = false;
-  void toggleAutoMute() {
-    autoMute = !autoMute;
-    notifyListeners();
-  }
-}
+//1. 하나의 값만 변경할때
+final videoConfig = ValueNotifier(false);
 
-final videoConfig = VideoConfig();
+//2. 여러개의 값을 변경할때
+// class VideoConfig extends ChangeNotifier {
+//   bool autoMute = false;
+//   void toggleAutoMute() {
+//     autoMute = !autoMute;
+//     notifyListeners();
+//   }
+// }
 
+// final videoConfig = VideoConfig();
 
+//3.제일 안좋은 방법
 /*import 'package:flutter/material.dart';
 
 class VideoConfigData extends InheritedWidget {
