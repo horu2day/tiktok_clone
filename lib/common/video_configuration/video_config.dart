@@ -1,7 +1,23 @@
 import 'package:flutter/material.dart';
 
+class VideoConfig extends ChangeNotifier {
+  bool isMuted = false;
+  bool isAutoplay = false;
+
+  void toggleIsMuted() {
+    isMuted = !isMuted;
+    notifyListeners();
+  }
+
+  void toggleIsAutoplay() {
+    isAutoplay = !isAutoplay;
+    notifyListeners();
+  }
+}
+
+
 //1. 하나의 값만 변경할때
-final videoConfig = ValueNotifier(false);
+//final videoConfig = ValueNotifier(false);
 
 //2. 여러개의 값을 변경할때
 // class VideoConfig extends ChangeNotifier {

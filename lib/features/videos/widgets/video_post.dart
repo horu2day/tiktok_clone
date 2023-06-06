@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:tiktok_clone/common/video_configuration/video_config.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
@@ -33,7 +34,7 @@ class _VideoPostState extends State<VideoPost>
   bool _isPaused = false;
   bool _isNotMute = false;
 
-  bool _autoMute = videoConfig.value;
+  //bool _autoMute = videoConfig.value;
 
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
@@ -73,11 +74,13 @@ class _VideoPostState extends State<VideoPost>
     // _animationController.addListener(() {
     //   setState(() {});
     // });
-    videoConfig.addListener(() {
-      setState(() {
-        _autoMute = videoConfig.value;
-      });
-    });
+
+    //notifyListner 호출시 실행.
+    // videoConfig.addListener(() {
+    //   setState(() {
+    //     _autoMute = videoConfig.value;
+    //   });
+    // });
   }
 
   @override
@@ -186,18 +189,25 @@ class _VideoPostState extends State<VideoPost>
             ),
           ),
           Positioned(
-              left: 20,
-              top: 40,
-              child: IconButton(
-                icon: FaIcon(
-                  _autoMute // VideoConfigData.of(context).autoMute
-                      ? FontAwesomeIcons.volumeOff
-                      : FontAwesomeIcons.volumeHigh,
-                  color: Colors.white,
-                ),
-                onPressed: () => videoConfig.value = !videoConfig.value,
-                //VideoConfigData.of(context).toggleMuted();
-              )),
+            left: 20,
+            top: 40,
+            child: IconButton(
+              icon: FaIcon(
+                context
+                        .watch<VideoConfig>()
+                        .isMuted // VideoConfigData.of(context).autoMute
+                    ? FontAwesomeIcons.volumeOff
+                    : FontAwesomeIcons.volumeHigh,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                context.read<VideoConfig>().toggleIsMuted();
+              },
+
+              //videoConfig.value = !videoConfig.value,
+              //VideoConfigData.of(context).toggleMuted();
+            ),
+          ),
           const Positioned(
             bottom: 20,
             left: 10,
