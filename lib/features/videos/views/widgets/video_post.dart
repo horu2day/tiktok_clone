@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/videos/view_models/playback_config_vm.dart';
 import 'package:tiktok_clone/features/videos/views/widgets/video_button.dart';
 import 'package:tiktok_clone/features/videos/views/widgets/video_comments.dart';
 import 'package:tiktok_clone/generated/l10n.dart';
@@ -79,6 +81,10 @@ class _VideoPostState extends State<VideoPost>
     //     _autoMute = videoConfig.value;
     //   });
     // });
+
+    context
+        .read<PlaybackConfigViewModel>()
+        .addListener(_onPlaybackConfigChanged);
   }
 
   @override
@@ -87,13 +93,26 @@ class _VideoPostState extends State<VideoPost>
     super.dispose();
   }
 
+  void _onPlaybackConfigChanged() {
+    if (!mounted) return;
+    final muted = context.read<PlaybackConfigViewModel>().muted;
+    if (muted) {
+      _videoPlayerController.setVolume(0);
+    } else {
+      _videoPlayerController.setVolume(1);
+    }
+  }
+
   void _onVisibilityChanged(VisibilityInfo info) {
     if (!mounted) return;
     //Play가 되는 조건 ,영상이 전부 화면에 들어 있으면서 재생이 안되고 있을때 Play해라
     if (info.visibleFraction == 1 &&
         !_isPaused &&
         !_videoPlayerController.value.isPlaying) {
-      _videoPlayerController.play();
+      final autoplay = context.read<PlaybackConfigViewModel>().autoplay;
+      if (autoplay) {
+        _videoPlayerController.play();
+      }
     }
     //멈추는 조건 , 비디오가 플레이중인데, 화면에 보이지 않는 다면 멈춰.
     if (_videoPlayerController.value.isPlaying && info.visibleFraction == 0) {
@@ -190,8 +209,8 @@ class _VideoPostState extends State<VideoPost>
             left: 20,
             top: 40,
             child: IconButton(
-              icon: const FaIcon(
-                false
+              icon: FaIcon(
+                context.read<PlaybackConfigViewModel>().muted
                     // 2. context
                     //         .watch<VideoConfig>()
                     //         .isMuted
@@ -201,7 +220,9 @@ class _VideoPostState extends State<VideoPost>
                 color: Colors.white,
               ),
               onPressed: () {
-                //context.read<VideoConfig>().toggleIsMuted();
+                context
+                    .read<PlaybackConfigViewModel>()
+                    .setMuted(!context.read<PlaybackConfigViewModel>().muted);
               },
 
               //videoConfig.value = !videoConfig.value,
