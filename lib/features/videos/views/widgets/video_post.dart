@@ -32,8 +32,8 @@ class _VideoPostState extends State<VideoPost>
   final Duration _animationDuration = const Duration(milliseconds: 200);
   late AnimationController _animationController;
   bool _isPaused = false;
-  bool _isNotMute = false;
-
+  late bool _isMuted = false;
+  bool _currentMute = false;
   //bool _autoMute = videoConfig.value;
 
   void _onVideoChange() {
@@ -81,7 +81,7 @@ class _VideoPostState extends State<VideoPost>
     //     _autoMute = videoConfig.value;
     //   });
     // });
-
+    _currentMute = _isMuted = context.read<PlaybackConfigViewModel>().muted;
     context
         .read<PlaybackConfigViewModel>()
         .addListener(_onPlaybackConfigChanged);
@@ -138,7 +138,7 @@ class _VideoPostState extends State<VideoPost>
       // Web인지 아닌지 여부
       _videoPlayerController.setVolume(20);
       setState(() {
-        _isNotMute = !_isNotMute;
+        _currentMute = !_currentMute;
       });
     }
   }
@@ -210,7 +210,7 @@ class _VideoPostState extends State<VideoPost>
             top: 40,
             child: IconButton(
               icon: FaIcon(
-                context.read<PlaybackConfigViewModel>().muted
+                _currentMute
                     // 2. context
                     //         .watch<VideoConfig>()
                     //         .isMuted
@@ -220,9 +220,9 @@ class _VideoPostState extends State<VideoPost>
                 color: Colors.white,
               ),
               onPressed: () {
-                context
-                    .read<PlaybackConfigViewModel>()
-                    .setMuted(!context.read<PlaybackConfigViewModel>().muted);
+                setState(() {
+                  _currentMute = !_currentMute;
+                });
               },
 
               //videoConfig.value = !videoConfig.value,
@@ -290,10 +290,10 @@ class _VideoPostState extends State<VideoPost>
                 GestureDetector(
                   onTap: () => _onVolumeOnOff,
                   child: VideoButton(
-                    icon: _isNotMute
+                    icon: _currentMute
                         ? FontAwesomeIcons.volumeXmark
                         : FontAwesomeIcons.volumeHigh,
-                    text: _isNotMute ? "mute" : "vol",
+                    text: _currentMute ? "mute" : "vol",
                   ),
                 ),
               ],
