@@ -32,7 +32,7 @@ class _VideoPostState extends State<VideoPost>
   final Duration _animationDuration = const Duration(milliseconds: 200);
   late AnimationController _animationController;
   bool _isPaused = false;
-  late bool _isMuted = false;
+  late final bool _isMuted = false;
   bool _currentMute = false;
   //bool _autoMute = videoConfig.value;
 
@@ -81,10 +81,10 @@ class _VideoPostState extends State<VideoPost>
     //     _autoMute = videoConfig.value;
     //   });
     // });
-    _currentMute = _isMuted = context.read<PlaybackConfigViewModel>().muted;
-    context
-        .read<PlaybackConfigViewModel>()
-        .addListener(_onPlaybackConfigChanged);
+    //_currentMute = _isMuted = context.read<PlaybackConfigViewModel>().muted;
+    // context
+    //     .read<PlaybackConfigViewModel>()
+    //     .addListener(_onPlaybackConfigChanged);
   }
 
   @override
@@ -95,8 +95,8 @@ class _VideoPostState extends State<VideoPost>
 
   void _onPlaybackConfigChanged() {
     if (!mounted) return;
-    final muted = context.read<PlaybackConfigViewModel>().muted;
-    if (muted) {
+    //final muted = context.read<PlaybackConfigViewModel>().muted;
+    if (false) {
       _videoPlayerController.setVolume(0);
     } else {
       _videoPlayerController.setVolume(1);
@@ -109,8 +109,8 @@ class _VideoPostState extends State<VideoPost>
     if (info.visibleFraction == 1 &&
         !_isPaused &&
         !_videoPlayerController.value.isPlaying) {
-      final autoplay = context.read<PlaybackConfigViewModel>().autoplay;
-      if (autoplay) {
+      //final autoplay = context.read<PlaybackConfigViewModel>().autoplay;
+      if (false) {
         _videoPlayerController.play();
       }
     }
