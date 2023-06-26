@@ -13,4 +13,10 @@ class UserProfileModel {
     required this.bio,
     required this.link,
   });
+  UserProfileModel.empty()
+      : uid = "",
+        email = "",
+        name = "",
+        bio = "",
+        link = "";
 }
