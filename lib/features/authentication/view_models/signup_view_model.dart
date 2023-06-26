@@ -27,7 +27,7 @@ class SignUpViewModel extends AsyncNotifier<void> {
           form["password"],
         );
         // 에러없으면 유저가 생성되었다는 뜻임.
-        await users.createAccount(userCredential);
+        await users.createProfile(userCredential);
       },
     );
     if (state.hasError) {
