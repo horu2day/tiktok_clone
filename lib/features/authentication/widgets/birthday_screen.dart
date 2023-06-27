@@ -29,7 +29,7 @@ class _BirthdayScreenState extends ConsumerState<BirthdayScreen> {
     super.dispose();
   }
 
-  void _onNextTap() {
+  void _onNextTap(BuildContext context) {
     ref.read(signUpProvider.notifier).signUp(context);
 
     // // 뒤로 못돌아 가고 interestScreen이 처음이 됨.
@@ -96,7 +96,7 @@ class _BirthdayScreenState extends ConsumerState<BirthdayScreen> {
             ),
             Gaps.v28,
             GestureDetector(
-              onTap: _onNextTap,
+              onTap: () => _onNextTap(context),
               child: FormButton(
                 disabled: ref.watch(signUpProvider).isLoading,
                 text: 'Next',

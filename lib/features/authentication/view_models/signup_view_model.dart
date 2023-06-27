@@ -30,6 +30,7 @@ class SignUpViewModel extends AsyncNotifier<void> {
         await users.createProfile(userCredential);
       },
     );
+
     if (state.hasError) {
       showFirebaseErrorSnack(context, state.error);
     } else {
