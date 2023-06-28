@@ -30,6 +30,14 @@ class _BirthdayScreenState extends ConsumerState<BirthdayScreen> {
   }
 
   void _onNextTap(BuildContext context) {
+    final bDay = _birthdayController.value.text;
+    print(bDay);
+    final state = ref.read(signUpForm.notifier).state;
+    ref.read(signUpForm.notifier).state = {
+      ...state,
+      "birthday": bDay,
+    };
+
     ref.read(signUpProvider.notifier).signUp(context);
 
     // // 뒤로 못돌아 가고 interestScreen이 처음이 됨.
