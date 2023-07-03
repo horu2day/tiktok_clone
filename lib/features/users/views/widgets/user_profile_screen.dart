@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/features/profileInfo/views/profileInfo_screen.dart';
 import 'package:tiktok_clone/features/settings/settings_screen.dart';
 import 'package:tiktok_clone/features/users/view_models/users_view_model.dart';
 import 'package:tiktok_clone/features/users/views/widgets/avatar.dart';
@@ -23,6 +24,14 @@ class UserProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
+  void _onPersonPressed() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const ProfileInfoScreen(),
+      ),
+    );
+  }
+
   void _onGearPressed() {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -54,6 +63,10 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                         centerTitle: true,
                         title: Text(data.name),
                         actions: [
+                          IconButton(
+                            onPressed: _onPersonPressed,
+                            icon: const FaIcon(FontAwesomeIcons.person),
+                          ),
                           IconButton(
                             onPressed: _onGearPressed,
                             icon: const FaIcon(FontAwesomeIcons.gear),
