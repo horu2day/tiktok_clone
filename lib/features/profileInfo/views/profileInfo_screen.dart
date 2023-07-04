@@ -4,6 +4,7 @@ import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/view_models/signup_view_model.dart';
 import 'package:tiktok_clone/features/authentication/widgets/form_button.dart';
+import 'package:tiktok_clone/features/users/view_models/users_view_model.dart';
 
 class ProfileInfoScreen extends ConsumerStatefulWidget {
   const ProfileInfoScreen({super.key});
@@ -13,17 +14,35 @@ class ProfileInfoScreen extends ConsumerStatefulWidget {
 }
 
 class _ProfileInfoScreenState extends ConsumerState<ProfileInfoScreen> {
-  final TextEditingController profileInfoController = TextEditingController();
-  final TextEditingController linkController = TextEditingController();
-  String bio = '';
-  String link = '';
+  final TextEditingController _bioController = TextEditingController();
+  final TextEditingController _linkController = TextEditingController();
+  String _bio = '';
+  String _link = '';
   void onApplyTap() {
+    final users = ref.read(usersProvider.notifier);
     final state = ref.read(signUpForm.notifier).state;
     ref.read(signUpForm.notifier).state = {
       ...state,
-      "bio": bio,
-      "line": link,
+      "bio": _bio,
+      "line": _link,
     };
+    users.profileInfoUpdate(_bio, _link);
+
+    Navigator.of(context).pop();
+  }
+
+  @override
+  void initState() {
+    _bioController.addListener(() {
+      setState(() {
+        _bio = _bioController.text;
+      });
+    });
+    _linkController.addListener(() {
+      setState(() {
+        _link = _linkController.text;
+      });
+    });
   }
 
   @override
@@ -43,7 +62,7 @@ class _ProfileInfoScreenState extends ConsumerState<ProfileInfoScreen> {
               style: TextStyle(fontSize: Sizes.size16, color: Colors.black54),
             ),
             TextField(
-              controller: profileInfoController,
+              controller: _bioController,
               decoration: InputDecoration(
                 hintText: 'bio',
                 enabledBorder: UnderlineInputBorder(
@@ -64,7 +83,7 @@ class _ProfileInfoScreenState extends ConsumerState<ProfileInfoScreen> {
               style: TextStyle(fontSize: Sizes.size16, color: Colors.black54),
             ),
             TextField(
-              controller: linkController,
+              controller: _linkController,
               decoration: InputDecoration(
                 hintText: 'link',
                 enabledBorder: UnderlineInputBorder(
