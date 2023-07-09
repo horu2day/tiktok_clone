@@ -66,6 +66,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1036241225960',
     projectId: 'tictok-kms6600',
     storageBucket: 'tictok-kms6600.appspot.com',
+    androidClientId: '1036241225960-3khs1bh0vbu48v14ppjgjfo5l5h0am1l.apps.googleusercontent.com',
     iosClientId: '1036241225960-hekig7efb21r66cedqktrntf3gq402l3.apps.googleusercontent.com',
     iosBundleId: 'com.example.tiktokClone',
   );
@@ -76,6 +77,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1036241225960',
     projectId: 'tictok-kms6600',
     storageBucket: 'tictok-kms6600.appspot.com',
+    androidClientId: '1036241225960-3khs1bh0vbu48v14ppjgjfo5l5h0am1l.apps.googleusercontent.com',
     iosClientId: '1036241225960-hekig7efb21r66cedqktrntf3gq402l3.apps.googleusercontent.com',
     iosBundleId: 'com.example.tiktokClone',
   );
