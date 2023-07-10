@@ -21,8 +21,8 @@ export const onVideoCreated = functions.firestore.document("videos/{videoId}").o
         ]);
         const storage = admin.storage();
         await storage.bucket().upload(`/tmp/${snapshot.id}.jpg`,{
-            destination: `/thumbnails/${snapshot.id}.jpg`,
-        },);
+            destination: `thumbnails/${snapshot.id}.jpg`,
+        });
     });
 
 
