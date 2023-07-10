@@ -28,18 +28,21 @@ class UploadVideoViewModel extends AsyncNotifier<void> {
           user!.uid,
         );
         if (task.metadata != null) {
-          await _repository.saveVideo(VideoModel(
-            title: "From Flutter!",
-            description: "Hell yeah!",
-            fileUrl: await task.ref.getDownloadURL(),
-            thumbnailUrl: "",
-            creatorUid: user.uid,
-            creator: userProfile.name,
-            likes: 0,
-            comments: 0,
-            createdAt: DateTime.now().millisecondsSinceEpoch,
-          ));
-          context.pushReplacement("/home");
+          await _repository.saveVideo(
+            VideoModel(
+              title: "From Flutter!",
+              description: "Hell yeah!",
+              fileUrl: await task.ref.getDownloadURL(),
+              thumbnailUrl: "",
+              creatorUid: user.uid,
+              creator: userProfile.name,
+              likes: 0,
+              comments: 0,
+              createdAt: DateTime.now().millisecondsSinceEpoch,
+            ),
+          );
+          context.pop();
+          context.pop();
         }
       });
     }
