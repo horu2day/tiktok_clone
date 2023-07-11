@@ -20,6 +20,16 @@ class VideosRepository {
   Future<void> saveVideo(VideoModel data) async {
     await _db.collection("videos").add(data.toJson());
   }
+
+  Future<QuerySnapshot<Map<String, dynamic>>> fetchVideo() async {
+    //likes 가 10 이상인 비디오 가져오기.
+    //_db.collection("videos").where("likes", isGreaterThan: 10).get();
+    //생성된 시각순으로 가져오기
+    return await _db
+        .collection("videos")
+        .orderBy("createdAt", descending: true)
+        .get();
+  }
 }
 
 final videoRepo = Provider((ref) => VideosRepository());
