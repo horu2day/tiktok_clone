@@ -7,7 +7,7 @@ import '../models/video_model.dart';
 
 class TimelineViewModel extends AsyncNotifier<List<VideoModel>> {
   late final VideosRepository _repository;
-  final List<VideoModel> _list = [];
+  List<VideoModel> _list = [];
 
   // 임시로 만들었던것.
   // void uploadVideo() async {
@@ -22,7 +22,14 @@ class TimelineViewModel extends AsyncNotifier<List<VideoModel>> {
   FutureOr<List<VideoModel>> build() async {
     _repository = ref.read(videoRepo);
     final result = await _repository.fetchVideo();
-    result.docs.map((e) => null);
+    final newList = result.docs.map(
+      (doc) => VideoModel.fromJson(
+        doc.data(),
+      ),
+    );
+    print(newList);
+    //
+    _list = newList.toList();
     //await Future.delayed(const Duration(seconds: 5)); // 나중에 Api에서 온다.
     //에러 발생을 테스트
     //throw Exception("omg can't fetch");
