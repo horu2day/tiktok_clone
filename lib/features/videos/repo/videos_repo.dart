@@ -21,14 +21,24 @@ class VideosRepository {
     await _db.collection("videos").add(data.toJson());
   }
 
-  Future<QuerySnapshot<Map<String, dynamic>>> fetchVideo() async {
+  Future<QuerySnapshot<Map<String, dynamic>>> fetchVideo(
+      {int? lastItemCreatedAt}) async {
     //likes 가 10 이상인 비디오 가져오기.
     //_db.collection("videos").where("likes", isGreaterThan: 10).get();
     //생성된 시각순으로 가져오기
-    return await _db
+    final query = _db
         .collection("videos")
         .orderBy("createdAt", descending: true)
-        .get();
+        .limit(2);
+
+    if (lastItemCreatedAt == null) {
+      return query.get();
+    } else {
+      return query.startAfter([lastItemCreatedAt]).get();
+    }
+
+    // .startAfter([3]) // createdAt 으로 Ordering 한 다음 3번 다음부터 시작하고 싶다는 의미(4,5)
+    // 배열을 쓴것은 여러필드들 다중 Ordering으로 우선순위에서 시작순서를 정함.
   }
 }
 
