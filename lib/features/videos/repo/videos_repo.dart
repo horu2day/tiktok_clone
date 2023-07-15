@@ -40,6 +40,15 @@ class VideosRepository {
     // .startAfter([3]) // createdAt 으로 Ordering 한 다음 3번 다음부터 시작하고 싶다는 의미(4,5)
     // 배열을 쓴것은 여러필드들 다중 Ordering으로 우선순위에서 시작순서를 정함.
   }
+
+  Future<void> likeVideo(String videoId, String userId) async {
+    await _db.collection("likes").add(
+      {
+        "videoId": videoId,
+        "userId": userId,
+      },
+    );
+  }
 }
 
 final videoRepo = Provider((ref) => VideosRepository());
