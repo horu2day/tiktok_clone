@@ -39,7 +39,29 @@ export const onVideoCreated = functions.firestore
         videoId: snapshot.id,
       });
   });
+export const onlikedCreated = functions.firestore
+  .document("likes/{likeId}")
+  .onCreate(async (snapshot, context) => {
+    //const [videoId, userid] = snapshot.id.split("000"); // 챌린지시 userid 사용
+    const db = admin.firestore();
+    const [videoId, _] = snapshot.id.split("000");
+    await db
+      .collection("videos")
+      .doc(videoId)
+      .update({ likes: admin.firestore.FieldValue.increment(1) }); //어떤 필드든 가져가서 1을 더한다.
+  });
 
+export const onlikedRemoved = functions.firestore
+  .document("likes/{likeId}")
+  .onDelete(async (snapshot, context) => {
+    //const [videoId, userid] = snapshot.id.split("000"); // 챌린지시 userid 사용
+    const db = admin.firestore();
+    const [videoId, _] = snapshot.id.split("000");
+    await db
+      .collection("videos")
+      .doc(videoId)
+      .update({ likes: admin.firestore.FieldValue.increment(-1) }); //어떤 필드든 가져가서 1을 더한다.
+  });
 /**
  * Import function triggers from their respective submodules:
  *

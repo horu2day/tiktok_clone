@@ -49,6 +49,8 @@ class VideosRepository {
       await query.set({
         "createdAt": DateTime.now().millisecondsSinceEpoch,
       });
+    } else {
+      await query.delete();
     }
   }
 }
