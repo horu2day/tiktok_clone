@@ -6,10 +6,12 @@ import 'package:tiktok_clone/constants/sizes.dart';
 class VideoButton extends StatelessWidget {
   final IconData icon;
   final String text;
+  final bool isLiked;
   const VideoButton({
     super.key,
     required this.icon,
     required this.text,
+    required this.isLiked,
   });
 
   @override
@@ -18,7 +20,7 @@ class VideoButton extends StatelessWidget {
       children: [
         FaIcon(
           icon,
-          color: Colors.white,
+          color: isLiked ? Colors.red : Colors.white,
           size: Sizes.size40,
         ),
         Gaps.v5,

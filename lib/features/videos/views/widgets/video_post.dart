@@ -40,6 +40,7 @@ class VideoPostState extends ConsumerState<VideoPost>
   bool _isPaused = false;
 
   bool _currentMute = false;
+  bool _isLiked = false;
   //bool _autoMute = videoConfig.value;
 
   void _onVideoChange() {
@@ -53,9 +54,12 @@ class VideoPostState extends ConsumerState<VideoPost>
 
   void _onLikeTap() {
     ref.read(videoPostProvider(widget.videoData.id).notifier).likeVideo();
+    setState(() {
+      _isLiked = !_isLiked;
+    });
   }
 
-  void _initVideoPlayer() async {
+  Future<void> _initVideoPlayer() async {
     await _videoPlayerController.initialize();
     //_videoPlayerController.play();
     setState(() {});
@@ -65,6 +69,12 @@ class VideoPostState extends ConsumerState<VideoPost>
     }
     await _videoPlayerController.setLooping(true);
     _videoPlayerController.addListener(_onVideoChange);
+
+    _isLiked = await ref
+        .read(videoPostProvider(widget.videoData.id).notifier)
+        .isLikeVideo();
+
+    setState(() {});
   }
 
   @override
@@ -281,6 +291,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                   child: VideoButton(
                     icon: FontAwesomeIcons.solidHeart,
                     text: S.of(context).likeCount(widget.videoData.likes),
+                    isLiked: _isLiked,
                   ),
                 ),
                 Gaps.v24,
@@ -291,12 +302,14 @@ class VideoPostState extends ConsumerState<VideoPost>
                     text: S.of(context).commentCount(
                           widget.videoData.comments,
                         ),
+                    isLiked: false,
                   ),
                 ),
                 Gaps.v24,
                 const VideoButton(
                   icon: FontAwesomeIcons.share,
                   text: "Share",
+                  isLiked: false,
                 ),
                 Gaps.v24,
                 GestureDetector(
@@ -306,6 +319,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                         ? FontAwesomeIcons.volumeXmark
                         : FontAwesomeIcons.volumeHigh,
                     text: _currentMute ? "mute" : "vol",
+                    isLiked: false,
                   ),
                 ),
               ],
