@@ -3,15 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UsersRepo {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
-  Future<void> sendMessage(UserModel user) async {
-    await _db
-        .collection("users")
-        .doc("mso0lHmsVHuOsnQg0BrF")
-        .collection("texts")
-        .add(
-          message.toJson(),
-        );
+
+  Future<QuerySnapshot<Map<String, dynamic>>> fetchUsers() async {
+    return _db.collection("users").orderBy("name", descending: true).get();
   }
 }
 
-final messagesRepo = Provider((ref) => MessagesRepo());
+final usersRepo = Provider((ref) => UsersRepo());
