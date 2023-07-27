@@ -1,54 +1,32 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tiktok_clone/features/authentication/repos/authentication_repo.dart';
-import 'package:tiktok_clone/features/inbox/models/message.dart';
-import 'package:tiktok_clone/features/inbox/repos/messages_repo.dart';
+import 'package:tiktok_clone/features/inbox/repos/users_repo.dart';
+import 'package:tiktok_clone/features/users/models/user_profile_model.dart';
 
-class SelectUserViewModel extends AsyncNotifier<void> {
-  late final MessagesRepo _repo;
+class SelectUserViewModel extends AsyncNotifier<List<UserProfileModel>> {
+  late final UsersRepo _repo;
+  List<UserProfileModel> _list = [];
   @override
-  FutureOr<void> build() {
-    _repo = ref.read(messagesRepo);
+  FutureOr<List<UserProfileModel>> build() async {
+    _repo = ref.read(usersRepo);
+    _list = await _fetchUsers();
+    return _list;
   }
 
-  //ViewModel 에서 코딩 패턴 - Model을 만들어 Repo에 넘긴다.
-  Future<void> sendMessage(String text) async {
-    final user = ref.read(authRepo).user;
-    state = const AsyncValue.loading();
-    state = await AsyncValue.guard(() async {
-      final message = MessageModel(
-        text: text,
-        userId: user!.uid,
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-      );
-      _repo.sendMessage(message);
-    });
+  Future<List<UserProfileModel>> _fetchUsers() async {
+    final result = await _repo.fetchUsers();
+    final users = result.docs.map(
+      (doc) => UserProfileModel.fromJson(
+        doc.data(),
+      ),
+    );
+
+    return users.toList();
   }
 }
 
-final messagesProvider = AsyncNotifierProvider<MessagesViewModel, void>(
-  () => MessagesViewModel(),
+final selectUsersModelProvider =
+    AsyncNotifierProvider<SelectUserViewModel, List<UserProfileModel>>(
+  () => SelectUserViewModel(),
 );
-
-final chatProvider = StreamProvider.autoDispose<List<MessageModel>>((ref) {
-  final db = FirebaseFirestore.instance;
-  return db
-      .collection("chat_rooms")
-      .doc("mso0lHmsVHuOsnQg0BrF")
-      .collection("texts")
-      .orderBy("createdAt")
-      .snapshots()
-      .map(
-        (event) => event.docs
-            .map(
-              (doc) => MessageModel.fromJson(
-                doc.data(),
-              ),
-            )
-            .toList()
-            .reversed
-            .toList(),
-      );
-});
