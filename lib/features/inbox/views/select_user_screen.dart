@@ -59,7 +59,12 @@ class _SelectUserScreenState extends ConsumerState<SelectUserScreen> {
                             children: [
                               CircleAvatar(
                                 radius: 18,
-                                backgroundColor: null,
+                                backgroundColor: Colors.black,
+                                foregroundColor: Colors.white,
+                                foregroundImage: userData.hasAvatar
+                                    ? NetworkImage(
+                                        "https://firebasestorage.googleapis.com/v0/b/tictok-kms6600.appspot.com/o/avatar%2F${userData.uid}?alt=media&token=24efe12b-aac6-4ff1-ae73-cdbc4a5fd3c5")
+                                    : null,
                                 child: Text(userData.name),
                               ),
                               Gaps.h10,
