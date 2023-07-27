@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/inbox/view_models/select_user_view_model.dart';
+import 'package:tiktok_clone/features/inbox/views/chat_detail_screen.dart';
 
 class SelectUserScreen extends ConsumerStatefulWidget {
   static const String routeName = "selectuser";
@@ -15,6 +17,12 @@ class SelectUserScreen extends ConsumerStatefulWidget {
 
 class _SelectUserScreenState extends ConsumerState<SelectUserScreen> {
   final ScrollController _scrollController = ScrollController();
+  void _onChatTap(int index) {
+    context.pushNamed(
+      ChatDetailScreen.routeName,
+      params: {"chatId": "$index"},
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,38 +62,42 @@ class _SelectUserScreenState extends ConsumerState<SelectUserScreen> {
                         itemCount: users.length,
                         itemBuilder: (context, index) {
                           final userData = users[index];
-                          return Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CircleAvatar(
-                                radius: 18,
-                                backgroundColor: Colors.black,
-                                foregroundColor: Colors.white,
-                                foregroundImage: userData.hasAvatar
-                                    ? NetworkImage(
-                                        "https://firebasestorage.googleapis.com/v0/b/tictok-kms6600.appspot.com/o/avatar%2F${userData.uid}?alt=media&token=24efe12b-aac6-4ff1-ae73-cdbc4a5fd3c5")
-                                    : null,
-                                child: Text(userData.name),
-                              ),
-                              Gaps.h10,
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      userData.name,
-                                      style: TextStyle(
-                                        fontSize: Sizes.size14,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.grey.shade500,
-                                      ),
-                                    ),
-                                    Gaps.v3,
-                                    Text(userData.bio),
-                                  ],
+                          return GestureDetector(
+                            onTap: () => _onChatTap(index),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CircleAvatar(
+                                  radius: 18,
+                                  backgroundColor: Colors.black,
+                                  foregroundColor: Colors.white,
+                                  foregroundImage: userData.hasAvatar
+                                      ? NetworkImage(
+                                          "https://firebasestorage.googleapis.com/v0/b/tictok-kms6600.appspot.com/o/avatar%2F${userData.uid}?alt=media&token=24efe12b-aac6-4ff1-ae73-cdbc4a5fd3c5")
+                                      : null,
+                                  child: Text(userData.name),
                                 ),
-                              ),
-                            ],
+                                Gaps.h10,
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        userData.name,
+                                        style: TextStyle(
+                                          fontSize: Sizes.size14,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.grey.shade500,
+                                        ),
+                                      ),
+                                      Gaps.v3,
+                                      Text(userData.bio),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           );
                         },
                       ),
