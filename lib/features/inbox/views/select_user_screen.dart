@@ -17,10 +17,11 @@ class SelectUserScreen extends ConsumerStatefulWidget {
 
 class _SelectUserScreenState extends ConsumerState<SelectUserScreen> {
   final ScrollController _scrollController = ScrollController();
-  void _onChatTap(int index) {
+  void _onChatTap(String uid) {
+    print(uid);
     context.pushNamed(
       ChatDetailScreen.routeName,
-      params: {"chatId": "$index"},
+      params: {"chatId": uid},
     );
   }
 
@@ -63,7 +64,7 @@ class _SelectUserScreenState extends ConsumerState<SelectUserScreen> {
                         itemBuilder: (context, index) {
                           final userData = users[index];
                           return GestureDetector(
-                            onTap: () => _onChatTap(index),
+                            onTap: () => _onChatTap(userData.uid),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
