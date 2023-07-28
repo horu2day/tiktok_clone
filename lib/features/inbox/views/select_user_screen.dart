@@ -17,11 +17,10 @@ class SelectUserScreen extends ConsumerStatefulWidget {
 
 class _SelectUserScreenState extends ConsumerState<SelectUserScreen> {
   final ScrollController _scrollController = ScrollController();
-  void _onChatTap(String uid) {
-    print(uid);
+  void _onChatTap(String userid) {
     context.pushNamed(
       ChatDetailScreen.routeName,
-      params: {"chatId": uid},
+      params: {"chatId": userid},
     );
   }
 
