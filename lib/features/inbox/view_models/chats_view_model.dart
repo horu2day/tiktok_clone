@@ -10,11 +10,11 @@ class ChatsViewModel extends AsyncNotifier<List<ChatModel>> {
   @override
   FutureOr<List<ChatModel>> build() async {
     _repo = ref.read(chatRoomsRepo);
-    _list = await _fetchRoos();
+    _list = await _fetchRooms();
     return _list;
   }
 
-  Future<List<ChatModel>> _fetchRoos() async {
+  Future<List<ChatModel>> _fetchRooms() async {
     final result = await _repo.fetchRooms();
     final rooms = result.docs.map(
       (doc) => ChatModel.fromJson(
