@@ -1,15 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tiktok_clone/features/inbox/repos/users_repo.dart';
+import 'package:tiktok_clone/features/inbox/repos/select_users_repo.dart';
 import 'package:tiktok_clone/features/users/models/user_profile_model.dart';
 
 class SelectUserViewModel extends AsyncNotifier<List<UserProfileModel>> {
-  late final UsersRepo _repo;
+  late final SelectUsersRepo _repo;
+
   List<UserProfileModel> _list = [];
   @override
   FutureOr<List<UserProfileModel>> build() async {
-    _repo = ref.read(usersRepo);
+    _repo = ref.read(selectUsersRepo);
     _list = await _fetchUsers();
     return _list;
   }

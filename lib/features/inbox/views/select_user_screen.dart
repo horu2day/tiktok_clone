@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/inbox/view_models/chats_view_model.dart';
 import 'package:tiktok_clone/features/inbox/view_models/select_user_view_model.dart';
 import 'package:tiktok_clone/features/inbox/views/chat_detail_screen.dart';
+import 'package:tiktok_clone/features/users/models/user_profile_model.dart';
 
 class SelectUserScreen extends ConsumerStatefulWidget {
   static const String routeName = "selectuser";
@@ -17,10 +19,13 @@ class SelectUserScreen extends ConsumerStatefulWidget {
 
 class _SelectUserScreenState extends ConsumerState<SelectUserScreen> {
   final ScrollController _scrollController = ScrollController();
-  void _onChatTap(String userid) {
+  void _onChatTap(UserProfileModel user) {
+    // 디비에 쳇룸을 하나 생성
+    ref.read(chatsProvider.notifier).createChatRoom(user);
+    //쳇룸으로 들어가기
     context.pushNamed(
       ChatDetailScreen.routeName,
-      params: {"chatId": userid},
+      params: {"chatId": user.uid},
     );
   }
 
@@ -63,7 +68,7 @@ class _SelectUserScreenState extends ConsumerState<SelectUserScreen> {
                         itemBuilder: (context, index) {
                           final userData = users[index];
                           return GestureDetector(
-                            onTap: () => _onChatTap(userData.uid),
+                            onTap: () => _onChatTap(userData),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

@@ -28,10 +28,10 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
     // 사용자 선택용를 하나 만들자
     context.pushNamed(SelectUserScreen.routeName);
 
-    if (_key.currentState != null) {
-      _key.currentState!.insertItem(_items.length, duration: _duration);
-      _items.add(_items.length);
-    }
+    // if (_key.currentState != null) {
+    //   _key.currentState!.insertItem(_items.length, duration: _duration);
+    //   _items.add(_items.length);
+    // }
   }
 
   void _deleteItem(int index, ChatModel chatModel) {
@@ -49,30 +49,29 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
     }
   }
 
-  void _onChatTap(int index) {
+  void _onChatTap(String chatId) {
     context.pushNamed(
       ChatDetailScreen.routeName,
-      params: {"chatId": "$index"},
+      params: {"chatId": chatId},
     );
   }
 
   Widget _makeTile(index, ChatModel chatModel) {
     return ListTile(
       onLongPress: () => _deleteItem(index, chatModel),
-      onTap: () => _onChatTap(index),
+      onTap: () => _onChatTap(chatModel.id),
       leading: CircleAvatar(
         radius: 30,
-        backgroundImage: const NetworkImage(
-          "https://avatars.githubusercontent.com/u/594733?s=400&u=51d0a83f972e0f874318c581a91cf0247a927773&v=4",
-        ),
-        child: Text(chatModel.personA),
+        foregroundImage: NetworkImage(
+            "https://firebasestorage.googleapis.com/v0/b/tictok-kms6600.appspot.com/o/avatar%2F${chatModel.personA}?alt=media&token=24efe12b-aac6-4ff1-ae73-cdbc4a5fd3c5"),
+        //: Text(chatModel.personAName),
       ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            chatModel.personB,
+            chatModel.personAName,
             style: const TextStyle(
               fontWeight: FontWeight.w600,
             ),
@@ -86,13 +85,13 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
           ),
         ],
       ),
-      subtitle: Text(chatModel.id),
+      subtitle: Text(chatModel.personABio),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return ref.watch(chatRoomsModelProvider).when(
+    return ref.watch(chatsProvider).when(
           loading: () => const Center(
             child: CircularProgressIndicator(),
           ),
