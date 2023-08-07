@@ -27,7 +27,8 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
     if (text == "") {
       return;
     }
-    ref.read(messagesProvider.notifier).sendMessage(text);
+
+    ref.read(messagesProvider.notifier).sendMessage(text, widget.chatId);
     _editingController.text = "";
   }
 

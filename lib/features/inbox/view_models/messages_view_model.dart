@@ -8,14 +8,16 @@ import 'package:tiktok_clone/features/inbox/repos/messages_repo.dart';
 
 class MessagesViewModel extends AsyncNotifier<void> {
   late final MessagesRepo _repo;
+  late final String chatId;
   @override
   FutureOr<void> build() {
     _repo = ref.read(messagesRepo);
   }
 
   //ViewModel 에서 코딩 패턴 - Model을 만들어 Repo에 넘긴다.
-  Future<void> sendMessage(String text) async {
+  Future<void> sendMessage(String text, String chatRoomId) async {
     final user = ref.read(authRepo).user;
+    chatId = chatRoomId;
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       final message = MessageModel(
@@ -23,7 +25,7 @@ class MessagesViewModel extends AsyncNotifier<void> {
         userId: user!.uid,
         createdAt: DateTime.now().millisecondsSinceEpoch,
       );
-      _repo.sendMessage(message);
+      _repo.sendMessage(message, chatRoomId);
     });
   }
 }
@@ -36,7 +38,7 @@ final chatProvider = StreamProvider.autoDispose<List<MessageModel>>((ref) {
   final db = FirebaseFirestore.instance;
   return db
       .collection("chat_rooms")
-      .doc("mso0lHmsVHuOsnQg0BrF")
+      .doc("")
       .collection("texts")
       .orderBy("createdAt")
       .snapshots()

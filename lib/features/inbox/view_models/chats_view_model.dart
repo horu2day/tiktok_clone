@@ -32,7 +32,7 @@ class ChatsViewModel extends AsyncNotifier<List<ChatModel>> {
     return rooms.toList();
   }
 
-  Future<List<ChatModel>> createChatRoom(UserProfileModel your) async {
+  Future<ChatModel> createChatRoom(UserProfileModel your) async {
     final user = ref.read(authRepo);
 
     state = const AsyncValue.loading();
@@ -49,16 +49,16 @@ class ChatsViewModel extends AsyncNotifier<List<ChatModel>> {
       _list = await _fetchRooms(); // Fetch the updated list of chat models
       state =
           AsyncData(_list); // Update the state with the new list of chat models
-      return _list; // Return the updated list of chat models
+      return chatRoom; // Return the updated list of chat models
     } catch (error) {
       state = AsyncError(error, StackTrace.current);
       rethrow; // Re-throw the error to notify callers about the failure
     }
   }
 
-  Future<UserProfileModel> findUser(String userId) async {
-    final profile = await _userRepo.findProfile(userId);
-    return UserProfileModel.fromJson(profile!);
+  Future<ChatModel> findChatRoom(String chatId) async {
+    final chatModel = await _repo.findChatRoom(chatId);
+    return ChatModel.fromJson(json: chatModel!, chatId: chatId);
   }
 }
 

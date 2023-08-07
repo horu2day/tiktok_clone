@@ -14,6 +14,11 @@ class ChatRoomsRepo {
   Future<void> createChatRoom(ChatModel room) async {
     await _db.collection("chat_rooms").add(room.toJson());
   }
+
+  Future<Map<String, dynamic>?> findChatRoom(String chatId) async {
+    final doc = await _db.collection("chat_rooms").doc(chatId).get();
+    return doc.data();
+  }
 }
 
 final chatRoomsRepo = Provider((ref) => ChatRoomsRepo());
