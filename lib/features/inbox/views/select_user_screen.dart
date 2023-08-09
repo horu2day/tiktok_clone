@@ -31,8 +31,6 @@ class _SelectUserScreenState extends ConsumerState<SelectUserScreen> {
         params: {"chatId": chatModel.id},
       );
     });
-
-    //쳇룸으로 들어가기
   }
 
   @override

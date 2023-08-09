@@ -75,7 +75,7 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
             ? NetworkImage(
                 "https://firebasestorage.googleapis.com/v0/b/tictok-kms6600.appspot.com/o/avatar%2F${chatModel.personA}?alt=media&token=24efe12b-aac6-4ff1-ae73-cdbc4a5fd3c5")
             : null,
-        child: Text(chatModel.personAName),
+        //child: Text(chatModel.personAName),
       ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
