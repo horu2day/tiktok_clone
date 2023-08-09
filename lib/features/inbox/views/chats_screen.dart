@@ -7,6 +7,7 @@ import 'package:tiktok_clone/features/inbox/models/chat.dart';
 import 'package:tiktok_clone/features/inbox/view_models/chats_view_model.dart';
 import 'package:tiktok_clone/features/inbox/views/chat_detail_screen.dart';
 import 'package:tiktok_clone/features/inbox/views/select_user_screen.dart';
+import 'package:tiktok_clone/features/users/repos/user_repo.dart';
 
 class ChatsScreen extends ConsumerStatefulWidget {
   static const String routeName = "chats";
@@ -57,14 +58,22 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
   }
 
   Widget _makeTile(index, ChatModel chatModel) {
+    var profile = ref.read(userRepo).findProfile(chatModel.personA);
+    profile.then((value) {
+      var hasAvatar = value["hasAvatar"];
+    });
+
+    //ref.read(usersProvider).chatModel.personA;
     return ListTile(
       onLongPress: () => _deleteItem(index, chatModel),
       onTap: () => _onChatTap(chatModel.id),
       leading: CircleAvatar(
         radius: 30,
-        foregroundImage: NetworkImage(
-            "https://firebasestorage.googleapis.com/v0/b/tictok-kms6600.appspot.com/o/avatar%2F${chatModel.personA}?alt=media&token=24efe12b-aac6-4ff1-ae73-cdbc4a5fd3c5"),
-        //: Text(chatModel.personAName),
+        foregroundImage: hasAvatar
+            ? NetworkImage(
+                "https://firebasestorage.googleapis.com/v0/b/tictok-kms6600.appspot.com/o/avatar%2F${chatModel.personA}?alt=media&token=24efe12b-aac6-4ff1-ae73-cdbc4a5fd3c5")
+            : null,
+        child: Text(chatModel.personAName),
       ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -8,7 +8,7 @@ import 'package:tiktok_clone/features/inbox/repos/messages_repo.dart';
 
 class MessagesViewModel extends AsyncNotifier<void> {
   late final MessagesRepo _repo;
-  late final String chatId;
+  String chatId = "";
   @override
   FutureOr<void> build() {
     _repo = ref.read(messagesRepo);
@@ -34,11 +34,12 @@ final messagesProvider = AsyncNotifierProvider<MessagesViewModel, void>(
   () => MessagesViewModel(),
 );
 
-final chatProvider = StreamProvider.autoDispose<List<MessageModel>>((ref) {
+final chatProvider = StreamProvider.autoDispose
+    .family<List<MessageModel>, String>((ref, chatId) {
   final db = FirebaseFirestore.instance;
   return db
       .collection("chat_rooms")
-      .doc("")
+      .doc(chatId)
       .collection("texts")
       .orderBy("createdAt")
       .snapshots()
