@@ -7,6 +7,7 @@ import 'package:tiktok_clone/features/inbox/models/chat.dart';
 import 'package:tiktok_clone/features/inbox/view_models/chats_view_model.dart';
 import 'package:tiktok_clone/features/inbox/views/chat_detail_screen.dart';
 import 'package:tiktok_clone/features/inbox/views/select_user_screen.dart';
+import 'package:tiktok_clone/features/users/models/user_profile_model.dart';
 import 'package:tiktok_clone/features/users/repos/user_repo.dart';
 
 class ChatsScreen extends ConsumerStatefulWidget {
@@ -59,8 +60,9 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
 
   Widget _makeTile(index, ChatModel chatModel) {
     var profile = ref.read(userRepo).findProfile(chatModel.personA);
+    var hasAvatar = false;
     profile.then((value) {
-      var hasAvatar = value["hasAvatar"];
+      hasAvatar = UserProfileModel.fromJson(value!).hasAvatar;
     });
 
     //ref.read(usersProvider).chatModel.personA;
