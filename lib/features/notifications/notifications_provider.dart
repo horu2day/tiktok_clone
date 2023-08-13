@@ -14,6 +14,18 @@ class NotificationsProvider extends AsyncNotifier {
     await _db.collection("users").doc(user!.uid).update({"token": token});
   }
 
+  Future<void> initListeners() async {
+    final permission = await _messaging.requestPermission();
+    if (permission.authorizationStatus == AuthorizationStatus.denied) {
+      return;
+    }
+    // Foreground 앱이 열려 있는 동안 받을 수 있는 방법
+    FirebaseMessaging.onMessage.listen((RemoteMessage event) {
+      print("I just got a message and I'm in the foreground!");
+      print(event.notification?.title);
+    });
+  }
+
   @override
   FutureOr build() async {
     final token = await _messaging.getToken();
@@ -21,6 +33,7 @@ class NotificationsProvider extends AsyncNotifier {
     if (token == null) return;
 
     await updateToken(token);
+    await initListeners();
     //token의 변화를 감지하도록 (subscribe) 하기
     _messaging.onTokenRefresh.listen((newToken) async {
       await updateToken(newToken);
