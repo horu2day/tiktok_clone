@@ -50,6 +50,7 @@ class DefaultFirebaseOptions {
     projectId: 'tictok-kms6600',
     authDomain: 'tictok-kms6600.firebaseapp.com',
     storageBucket: 'tictok-kms6600.appspot.com',
+    measurementId: 'G-LEXSHWTGDK',
   );
 
   static const FirebaseOptions android = FirebaseOptions(

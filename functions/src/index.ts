@@ -49,6 +49,28 @@ export const onlikedCreated = functions.firestore
       .collection("videos")
       .doc(videoId)
       .update({ likes: admin.firestore.FieldValue.increment(1) }); //어떤 필드든 가져가서 1을 더한다.
+    //코드로 Notification Message 보내는것. notification을 firebase에서 수동으로 날려줬다면 아래는 코딩으로 날리는 것임.
+    const video = await (
+      await db.collection("videos").doc(videoId).get()
+    ).data();
+    if (video) {
+      const creatorUid = video.creatorUid;
+      const user = await (
+        await db.collection("users").doc(creatorUid).get()
+      ).data();
+      if (user) {
+        const token = user.token;
+        await admin.messaging().sendToDevice(token, {
+          data: {
+            screen: "123",
+          },
+          notification: {
+            title: "someone liked your video",
+            body: "Likes + 1! Congrats 하트뽕",
+          },
+        });
+      }
+    }
   });
 
 export const onlikedRemoved = functions.firestore
