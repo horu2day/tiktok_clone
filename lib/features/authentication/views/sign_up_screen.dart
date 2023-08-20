@@ -6,9 +6,9 @@ import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/view_models/social_auth_view_model.dart';
 
-import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
-import 'package:tiktok_clone/features/authentication/widgets/login_screen.dart';
-import 'package:tiktok_clone/features/authentication/widgets/username_screen.dart';
+import 'package:tiktok_clone/features/authentication/views/widgets/auth_button.dart';
+import 'package:tiktok_clone/features/authentication/views/login_screen.dart';
+import 'package:tiktok_clone/features/authentication/views/username_screen.dart';
 import 'package:tiktok_clone/generated/l10n.dart';
 import 'package:tiktok_clone/utils.dart';
 
