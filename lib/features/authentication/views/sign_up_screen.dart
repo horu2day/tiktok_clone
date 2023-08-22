@@ -98,9 +98,9 @@ class SignUpScreen extends ConsumerWidget {
               Gaps.v40,
               GestureDetector(
                 onTap: () => _onEmailTap(context),
-                child: AuthButton(
-                    icon: const FaIcon(FontAwesomeIcons.solidUser),
-                    text: S.of(context).emailPasswordButton),
+                child: const AuthButton(
+                    icon: FaIcon(FontAwesomeIcons.solidUser),
+                    text: "Use Phone or Email"),
                 //text: S.of(context).emailPasswordButton),
               ),
               Gaps.v10,

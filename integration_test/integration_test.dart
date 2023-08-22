@@ -25,9 +25,13 @@ void main() {
     final logIn = find.text("Log in");
     expect(logIn, findsOneWidget);
     await tester.tap(logIn); //글씨를 찾아서 Tap
-    await tester.pumpAndSettle(const Duration(seconds: 20)); // 애니메이션처럼 기다리는걸 흉내
+    await tester.pumpAndSettle(const Duration(seconds: 3)); // 애니메이션처럼 기다리는걸 흉내
 
     final signUp = find.text("Sign up");
     expect(signUp, findsOneWidget);
+    await tester.tap(signUp);
+    final emailBtn = find.text("Use Phone or Email");
+    expect(emailBtn, findsOneWidget);
+    await tester.tap(emailBtn);
   });
 }
