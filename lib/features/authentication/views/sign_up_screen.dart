@@ -77,9 +77,10 @@ class SignUpScreen extends ConsumerWidget {
           child: Column(
             children: [
               Gaps.v80,
-              Text(
-                S.of(context).signUpTitle("TikTok", DateTime.now()),
-                style: const TextStyle(
+              const Text(
+                "Sign up for TikTok",
+                //S.of(context).signUpTitle("TikTok", DateTime.now()),
+                style: TextStyle(
                   fontSize: Sizes.size24,
                   fontWeight: FontWeight.w700,
                 ),
@@ -100,6 +101,7 @@ class SignUpScreen extends ConsumerWidget {
                 child: AuthButton(
                     icon: const FaIcon(FontAwesomeIcons.solidUser),
                     text: S.of(context).emailPasswordButton),
+                //text: S.of(context).emailPasswordButton),
               ),
               Gaps.v10,
               GestureDetector(
@@ -128,7 +130,8 @@ class SignUpScreen extends ConsumerWidget {
               GestureDetector(
                 onTap: () => _onLoginTap(context),
                 child: Text(
-                  S.of(context).logIn("female"),
+                  "Log in",
+                  //S.of(context).logIn("female"),
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: Theme.of(context).primaryColor),
